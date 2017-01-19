@@ -1,0 +1,84 @@
+language: python
+
+python:
+  - 2.7
+  - pypy
+
+env:
+  matrix:
+    - IMPACTLAB_TOOLS_TEST_ENV=conda
+
+matrix:
+  allow_failures:
+    - python: pypy
+      env: IMPACTLAB_TOOLS_TEST_ENV=conda
+
+install:
+  - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
+      if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+          wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
+        else
+          wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+        fi;
+      bash miniconda.sh -b -p $HOME/miniconda;
+      export PATH="$HOME/miniconda/bin:$PATH";
+      hash -r;
+      conda config --set always_yes yes --set changeps1 no;
+      conda update -q conda;
+      conda info -a;
+
+      conda create -q -n impactlab_tools python=$TRAVIS_PYTHON_VERSION h5py netCDF4 xarray dask numpy scipy pandas h5py hdf5 numba blaze scipy bottleneck dask;
+      source activate impactlab_tools;
+    fi
+  - python setup.py install
+  - python -m pip install .
+  - python -m pip install .[test]
+  - python -m pip install coveralls
+  - python -m pip install pytest-cov
+
+script:
+  - export PATH=/home/travis/miniconda/bin:$PATH
+  - export PATH=/home/travis/miniconda1/bin:$PATH
+  - export PATH=/home/travis/miniconda2/bin:$PATH
+  - export PATH=/home/travis/miniconda3/bin:$PATH
+  - export PATH=/home/travis/miniconda4/bin:$PATH
+  - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
+      source activate impactlab_tools;
+
+      if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then 
+        python -m pytest ./impactlab_tools ./tests;
+      else
+        python -m pytest ./impactlab_tools ./tests --cov=impactlab_tools --cov=tests --doctest-modules --cov-report term-missing;
+      fi;
+    else
+      if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then 
+        tox;
+      else 
+        tox;
+      fi;
+    fi
+
+
+deploy:
+  provider: pypi
+  user: delgadom
+  password:
+    secure: Jw4AqKuQcVpK9nsLZu/chk91cLGZxdwTugewhQlaEp5k1Hyx6HxvJMg5LFg4cFzfzRibmOtatWJUDy9XA3q7OhDNwKjd2UxCflOpB/Sb3jsgUWnEnGOgr8bDbnfRUW40zZf4vheKhSGif5hf3HqtnPMe41vtLy8QzTQSMl7FHgLI0eW+6sXErzKdDVmkcNGFhjClm7/yWJRPxNxFsJv2ofXMFkdN97eaN8gOiNKteB0JRHsKiAvH/y8nHKO/R/f3GwAyXw+WlkxoD0iMYyAUy+CTU1U83Kphwym1y2xkh6KGJnyKMiOm7bSWqomHRcHD5vCj8Qlxz5LD+Xpy/CIRe3tw5YmDJDrpTAEQLJgH5h2ers6H7+uk5VPdBL8O/L+Vk2yKAt0F0nWw9nObiGWCUx3efuikqyEDZkpiGkDgFszIFeLpvd1TFSM0AnQNhhof3KDaFSkTGc4cuYPKbVQCAC0wevZPExKj5f6djPkyl5SaoAOGbHfuKuLsHbssX8IBOU193r8c/K03rjDTtcwvkT73uKE2II9Rfo8R8drqH/kznr8Kq1wUEKGh/A4uretZlr2dw051qi6qxgEgUKoQNfuIhP+5KBm7Zp2jIdG3Nqi4iP9zpH4+Kjwvhl6hn9Kx5SDwxVwbnS5A9P7I6L32QyZbc5VJSs2RaiKeG5h8o7I=
+  on:
+    branch: master
+    distributions: sdist bdist_wheel
+    repo: ClimateImpactLab/impactlab-tools
+
+services:
+  - docker
+
+before_install:
+  - docker pull tray/dynamodb-local
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+
+after_success:
+  - coveralls
