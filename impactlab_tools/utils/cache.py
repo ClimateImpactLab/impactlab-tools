@@ -10,7 +10,7 @@ class DataCache(object):
 
     @classmethod
     def retrieve(cls, archive_name, api=None):
-        
+
         if archive_name in cls._data:
             return cls._data[archive_name]
 
@@ -18,7 +18,7 @@ class DataCache(object):
 
             if cls._api is None:
                 cls._api = datafs.get_api()
-            
+
             api = cls._api
 
         archive = api.get_archive(archive_name)
