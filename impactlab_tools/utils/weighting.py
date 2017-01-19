@@ -2,14 +2,14 @@ import numpy as np
 import xarray as xr
 
 
-## Computation helpers
+# Computation helpers
 
 def weighted_quantile_xr(
-    data,
-    quantiles,
-    sample_weight,
-    dim,
-    values_sorted=False):
+        data,
+        quantiles,
+        sample_weight,
+        dim,
+        values_sorted=False):
     """
     Compute quantiles of a weighted distribution
 
@@ -54,7 +54,8 @@ def weighted_quantile_xr(
 
     axis = data.get_axis_num(dim)
     dims = list(data.dims[:axis]) + ['quantile'] + list(data.dims[axis+1:])
-    coords = {coord:data.coords[coord] for coord in data.dims if coord in dims}
+    coords = {
+        coord: data.coords[coord] for coord in data.dims if coord in dims}
     coords.update({'quantile': quantiles})
 
     data_dist = weighted_quantile(
@@ -69,14 +70,13 @@ def weighted_quantile_xr(
     return data_dist
 
 
-
 def weighted_quantile(
-    values,
-    quantiles,
-    sample_weight=None,
-    values_sorted=False,
-    old_style=False,
-    axis=None):
+        values,
+        quantiles,
+        sample_weight=None,
+        values_sorted=False,
+        old_style=False,
+        axis=None):
     """
     Compute quantiles of a weighted distribution
 
@@ -140,11 +140,11 @@ def weighted_quantile(
 
 
 def weighted_quantile_1d(
-    values,
-    quantiles,
-    sample_weight=None,
-    values_sorted=False,
-    old_style=False):
+        values,
+        quantiles,
+        sample_weight=None,
+        values_sorted=False,
+        old_style=False):
     """
     Very close to numpy.percentile, but supports weights
 

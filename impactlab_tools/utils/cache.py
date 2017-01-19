@@ -2,6 +2,8 @@
 import xarray as xr
 import metacsv
 import datafs
+import os
+
 
 class DataCache(object):
 
