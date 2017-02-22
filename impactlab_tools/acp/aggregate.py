@@ -1,4 +1,9 @@
 
+import datafs
+import xarray as xr
+import pandas as pd
+import metacsv
+
 
 def population_weighted_mean(ds, level='state', dim='fips', year=2012, api=None, pop=None):
     if pop is None and api is None:

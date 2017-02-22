@@ -12,7 +12,7 @@ requirements_install = [
     'netCDF4>=1.1',
     'xarray>=0.8',
     'metacsv>=0.0.16',
-    'datafs>=0.6.5'
+    'datafs>=0.6.9'
     ]
 
 requirements_test = [
