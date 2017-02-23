@@ -7,11 +7,6 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 requirements_install = [
-    'numpy>=1.7',
-    'pandas>=0.15',
-    'netCDF4>=1.1',
-    'xarray>=0.8',
-    'metacsv>=0.0.16',
     'datafs>=0.6.9'
     ]
 
@@ -28,8 +23,17 @@ requirements_test = [
     'pytest-runner>=2.5'
     ]
 
+requirements_conda = [
+    'numpy>=1.7',
+    'pandas>=0.15',
+    'netCDF4>=1.1',
+    'xarray>=0.8',
+    'metacsv>=0.0.16'
+]
+
 extras = {
-    'test': requirements_test
+    'test': requirements_test,
+    'conda': requirements_conda
 }
 
 
