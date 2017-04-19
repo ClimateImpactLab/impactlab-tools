@@ -1,4 +1,4 @@
-* DataFS Distributed Data Management System version:
+* Impactlab-tools version:
 * Python version:
 * Operating System:
 
