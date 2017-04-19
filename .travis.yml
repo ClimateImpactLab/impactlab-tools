@@ -27,7 +27,8 @@ install:
       conda update -q conda;
       conda info -a;
 
-      conda create -q -n impactlab_tools python=$TRAVIS_PYTHON_VERSION h5py netCDF4 xarray dask numpy scipy pandas h5py hdf5 numba blaze scipy bottleneck dask;
+      conda create -q -n impactlab_tools python=$TRAVIS_PYTHON_VERSION;
+      conda install -n impactlab_tools --yes --file requirements_conda.txt;
       source activate impactlab_tools;
     fi
   - python setup.py install
@@ -37,11 +38,7 @@ install:
   - python -m pip install pytest-cov
 
 script:
-  - export PATH=/home/travis/miniconda/bin:$PATH
-  - export PATH=/home/travis/miniconda1/bin:$PATH
   - export PATH=/home/travis/miniconda2/bin:$PATH
-  - export PATH=/home/travis/miniconda3/bin:$PATH
-  - export PATH=/home/travis/miniconda4/bin:$PATH
   - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
       source activate impactlab_tools;
 

@@ -4,3 +4,10 @@ pandas==0.19.2
 netCDF4==1.2.7
 xarray==0.8.2
 metacsv==0.0.16
+h5py
+hdf5
+numba
+blaze
+scipy
+bottleneck
+dask
