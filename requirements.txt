@@ -1,2 +1,2 @@
-datafs==0.6.9
+datafs==0.7.0
 metacsv==0.0.16
