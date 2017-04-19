@@ -5,7 +5,7 @@ xarray==0.9.5
 metacsv==0.0.16
 h5py==2.7.0
 hdf5
-numba
+numba==0.32.0
 blaze
 scipy
 bottleneck
