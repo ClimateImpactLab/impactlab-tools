@@ -8,5 +8,5 @@ hdf5
 numba==0.32.0
 blaze==0.10.1
 scipy==0.19.0
-bottleneck
+bottleneck==1.2.0
 dask
