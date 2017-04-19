@@ -6,7 +6,7 @@ metacsv==0.0.16
 h5py==2.7.0
 hdf5
 numba==0.32.0
-blaze
+blaze==0.10.1
 scipy
 bottleneck
 dask
