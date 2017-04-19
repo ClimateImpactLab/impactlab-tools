@@ -30,10 +30,9 @@ install:
       conda config --set always_yes yes --set changeps1 no;
       conda update -q conda;
       conda info -a;
-
       conda create -q -n impactlab_tools python=$TRAVIS_PYTHON_VERSION;
-      conda install -n impactlab_tools --yes --file requirements_conda.txt;
       source activate impactlab_tools;
+      conda install --yes --file requirements_conda.txt;
       python -m pip install -r requirements.txt;
       python -m pip install -r requirements_test.txt;
     else
