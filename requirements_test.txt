@@ -7,5 +7,5 @@ tox==2.7.0
 coverage==4.3.4
 pytest==3.0.7
 pytest_cov==2.4.0
-pytest-runner==2.9
+pytest-runner==2.11.1
 coveralls
