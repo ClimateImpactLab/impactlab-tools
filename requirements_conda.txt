@@ -1,6 +1,12 @@
-datafs==0.6.9
 numpy==1.12
 pandas==0.19.2
-netCDF4==1.2.7
+netcdf4==1.2.7
 xarray==0.8.2
 metacsv==0.0.16
+h5py
+hdf5
+numba
+blaze
+scipy
+bottleneck
+dask
