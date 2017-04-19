@@ -1,5 +1,5 @@
 Sphinx==1.5.5
-sphinx_rtd_theme==0.1.10a0
+sphinx-rtd-theme==0.2.5b1
 pip==9.0.1
 wheel==0.29.0
 flake8==3.2.1
