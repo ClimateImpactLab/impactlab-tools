@@ -20,7 +20,8 @@ requirements_test = [
     'coverage>=4.0',
     'pytest>=3.0',
     'pytest_cov>=2.0',
-    'pytest-runner>=2.5'
+    'pytest-runner>=2.5',
+    'coveralls>=1.0'
     ]
 
 requirements_conda = [
