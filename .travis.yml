@@ -36,6 +36,8 @@ install:
       source activate impactlab_tools;
       python -m pip install -r requirements.txt;
       python -m pip install -r requirements_test.txt;
+    else
+      python -m pip install tox-travis;
     fi
 
 script:
