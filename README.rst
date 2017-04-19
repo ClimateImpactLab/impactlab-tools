@@ -20,6 +20,9 @@ Climate Impact Lab development toolkit
      :target: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/
      :alt: Updates
 
+.. image:: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/python-3-shield.svg
+     :target: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/
+     :alt: Python 3
 
 Python tools for Climate Impact Lab developers
 
