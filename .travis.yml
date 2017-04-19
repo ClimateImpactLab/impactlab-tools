@@ -43,12 +43,7 @@ script:
   - export PATH=/home/travis/miniconda2/bin:$PATH
   - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
       source activate impactlab_tools;
-
-      if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then 
-        python -m pytest ./impactlab_tools ./tests;
-      else
         python -m pytest ./impactlab_tools ./tests --cov=impactlab_tools --cov=tests --doctest-modules --cov-report term-missing;
-      fi;
     else
       tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypypy/pypy/');
     fi
