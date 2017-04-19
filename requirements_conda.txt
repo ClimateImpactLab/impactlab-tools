@@ -1,7 +1,7 @@
 numpy==1.12.1
 pandas==0.19.2
 netcdf4==1.2.7
-xarray==0.8.2
+xarray==0.9.5
 metacsv==0.0.16
 h5py
 hdf5
