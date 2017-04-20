@@ -44,11 +44,11 @@ script:
   - export PATH=/home/travis/miniconda2/bin:$PATH
   - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
       source activate impactlab_tools;
-        python -m pytest;
+      python -m pytest;
+      sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html;
     else
       tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypypy/pypy/');
     fi
-  - sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html
   
 deploy:
   provider: pypi
