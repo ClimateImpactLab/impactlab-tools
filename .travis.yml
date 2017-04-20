@@ -48,8 +48,8 @@ script:
     else
       tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypypy/pypy/');
     fi
-
-
+  - sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html
+  
 deploy:
   provider: pypi
   user: delgadom
