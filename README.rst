@@ -47,9 +47,13 @@ Installation
 
 
 
-
 Requirements
 ------------
+
+Latest Release Notes
+--------------------
+
+See `whatsnew <https://github.com/ClimateImpactLab/impactlab-tools/blob/master/whatsnew.rst>`_
 
 
 Todo
