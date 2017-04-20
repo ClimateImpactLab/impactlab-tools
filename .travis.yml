@@ -2,14 +2,18 @@ language: python
 
 python:
   - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
   - pypy
 
 env:
   matrix:
     - IMPACTLAB_TOOLS_TEST_ENV=conda
+    - IMPACTLAB_TOOLS_TEST_ENV=tox
 
 matrix:
-  allow_failures:
+  exclude:
     - python: pypy
       env: IMPACTLAB_TOOLS_TEST_ENV=conda
 
@@ -24,41 +28,28 @@ install:
       export PATH="$HOME/miniconda/bin:$PATH";
       hash -r;
       conda config --set always_yes yes --set changeps1 no;
+      conda config --add channels conda-forge;
       conda update -q conda;
       conda info -a;
-
-      conda create -q -n impactlab_tools python=$TRAVIS_PYTHON_VERSION h5py netCDF4 xarray dask numpy scipy pandas h5py hdf5 numba blaze scipy bottleneck dask;
+      conda create -q -n impactlab_tools python=$TRAVIS_PYTHON_VERSION;
       source activate impactlab_tools;
+      conda install --yes --file requirements_conda.txt;
+      python -m pip install -r requirements.txt;
+      python -m pip install -r requirements_test.txt;
+    else
+      python -m pip install tox-travis;
     fi
-  - python setup.py install
-  - python -m pip install .
-  - python -m pip install .[test]
-  - python -m pip install coveralls
-  - python -m pip install pytest-cov
 
 script:
-  - export PATH=/home/travis/miniconda/bin:$PATH
-  - export PATH=/home/travis/miniconda1/bin:$PATH
   - export PATH=/home/travis/miniconda2/bin:$PATH
-  - export PATH=/home/travis/miniconda3/bin:$PATH
-  - export PATH=/home/travis/miniconda4/bin:$PATH
   - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
       source activate impactlab_tools;
-
-      if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then 
-        python -m pytest ./impactlab_tools ./tests;
-      else
-        python -m pytest ./impactlab_tools ./tests --cov=impactlab_tools --cov=tests --doctest-modules --cov-report term-missing;
-      fi;
+      python -m pytest;
+      sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html;
     else
-      if [[ "$TRAVIS_PYTHON_VERSION" == "3.5" ]]; then 
-        tox;
-      else 
-        tox;
-      fi;
+      tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypypy/pypy/');
     fi
-
-
+  
 deploy:
   provider: pypi
   user: delgadom
