@@ -12,8 +12,8 @@ Climate Impact Lab development toolkit
 .. image:: https://coveralls.io/repos/github/ClimateImpactLab/impactlab-tools/badge.svg?branch=master
         :target: https://coveralls.io/github/ClimateImpactLab/impactlab-tools?branch=master
 
-.. image:: https://readthedocs.com/projects/impactlab-tools/badge/?version=latest
-        :target: https://impactlab-tools.readthedocs.com/en/latest/?badge=latest
+.. image:: https://www.readthedocs.io/projects/impactlab-tools/badge/?version=latest
+        :target: https://impactlab-tools.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/shield.svg
@@ -27,7 +27,7 @@ Climate Impact Lab development toolkit
 Python tools for Climate Impact Lab developers
 
 
-* Documentation: https://impactlab-tools.readthedocs.com.
+* Documentation: http://impactlab-tools.readthedocs.io/en/latest/.
 
 
 Features
