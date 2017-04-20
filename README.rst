@@ -2,11 +2,6 @@
 Climate Impact Lab development toolkit
 =========================================
 
-.. image:: https://api.codacy.com/project/badge/Grade/2d53428d5e5e41ecbc673208b2b0692c
-   :alt: Codacy Badge
-   :target: https://www.codacy.com/app/delgadom/impactlab-tools?utm_source=github.com&utm_medium=referral&utm_content=ClimateImpactLab/impactlab-tools&utm_campaign=badger
-
-
 .. image:: https://img.shields.io/pypi/v/impactlab-tools.svg
         :target: https://pypi.python.org/pypi/impactlab-tools
 
@@ -27,6 +22,10 @@ Climate Impact Lab development toolkit
 .. image:: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/python-3-shield.svg
      :target: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/
      :alt: Python 3
+
+.. image:: https://api.codacy.com/project/badge/Grade/2d53428d5e5e41ecbc673208b2b0692c
+   :alt: Codacy Badge
+   :target: https://www.codacy.com/app/delgadom/impactlab-tools?utm_source=github.com&utm_medium=referral&utm_content=ClimateImpactLab/impactlab-tools&utm_campaign=badger
 
 Python tools for Climate Impact Lab developers
 
