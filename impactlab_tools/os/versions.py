@@ -5,7 +5,7 @@ def check_version(input_list, check_git=False):
     Input:
         input_list: list of strings, all module names
         check_git: True if the caller also wants to check the git hash of a repo (input_list contains its name) that's under the user's home dir.
-    Output: 
+    Output:
         A dictionary of the modules: keys are the module names, each key has value of another dictionary, containing:
         "source": how is the module installed ("pip", "local", "git", or None):
             - source is "pip" if it's an open-sourced python package installed through pip.
@@ -20,9 +20,9 @@ def check_version(input_list, check_git=False):
     modules = {}
     for mod in pips:
         if ".git@" in mod:
-            # Assume the format of a local repo in pip freeze looks like this: 
+            # Assume the format of a local repo in pip freeze looks like this:
             # "-e git+https://github.com/<UserName>/<RepoName>.git@<Git_Hash>#egg=computer-master"
-            # We are interested in the <Git_Hash> part, saving in the modules dictionary with <RepoName> as the key. 
+            # We are interested in the <Git_Hash> part, saving in the modules dictionary with <RepoName> as the key.
             ind = mod.index(".git@")
             end = mod.index("#")
             modules[mod[:ind].split("/")[-1]] = mod[ind+5:end]
@@ -59,5 +59,4 @@ def check_version(input_list, check_git=False):
 
 # Example:
 # input_list = ["scipy", "numpy", "Cheetah", "computer", "impact-calculations", "metacsv"]
-# check_version(input_list, check_git=True) 
-
+# check_version(input_list, check_git=True)
