@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import xarray as xr
 
 
@@ -58,10 +59,15 @@ def weighted_quantile_xr(
         coord: data.coords[coord] for coord in data.dims if coord in dims}
     coords.update({'quantile': quantiles})
 
+    if isinstance(sample_weight, (pd.Series, xr.DataArray)):
+        weights = sample_weight.loc[data.coords[dim].values].values
+    else:
+        weights = sample_weight
+
     data_dist = weighted_quantile(
         data.values,
         quantiles,
-        sample_weight.loc[data.coords[dim].values].values,
+        weights,
         values_sorted=values_sorted,
         axis=axis)
 
@@ -190,7 +196,7 @@ def weighted_quantile_1d(
     quantiles = np.array(quantiles)
 
     if sample_weight is None:
-        sample_weight = np.ones(len(values))
+        return np.percentile(values, quantiles)
 
     sample_weight = np.array(sample_weight)
 
@@ -203,11 +209,14 @@ def weighted_quantile_1d(
         values = values[sorter]
         sample_weight = sample_weight[sorter]
 
+    # Find the cumsum, and locate the center of each weight's mass
+    # e.g. [0.25, 0.25, 0.5, 0] --> [0.125, 0.375, 0.75, 1]
     weighted_quantiles = np.cumsum(sample_weight) - 0.5 * sample_weight
 
     if old_style:
 
         # To be convenient with np.percentile
+        # e.g. [0, 0.25, 0.25, 0.5, 0] --> [ 0, 0.2857, 0.7143, 1]
         weighted_quantiles -= weighted_quantiles[0]
         weighted_quantiles /= weighted_quantiles[-1]
 

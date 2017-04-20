@@ -16,10 +16,13 @@ Climate Impact Lab development toolkit
         :target: https://impactlab-tools.readthedocs.com/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/climateimpactlab/impactlab-tools/shield.svg
-     :target: https://pyup.io/repos/github/climateimpactlab/impactlab-tools/
+.. image:: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/shield.svg
+     :target: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/
      :alt: Updates
 
+.. image:: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/python-3-shield.svg
+     :target: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/
+     :alt: Python 3
 
 Python tools for Climate Impact Lab developers
 
