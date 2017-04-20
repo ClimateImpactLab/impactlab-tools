@@ -53,13 +53,22 @@ suppress_warnings = ['image.nonlocal_uri']
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
+    'sphinx.ext.extlinks',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx']
 
+extlinks = {
+    'issue': (
+        'https://github.com/ClimateImpactLab/impactlab-tools/issues/%s',
+        'GH #'),
+    'pull': (
+        'https://github.com/ClimateImpactLab/impactlab-tools/pull/%s',
+        'PR #')}
 
 napoleon_numpy_docstring = True
 
