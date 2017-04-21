@@ -13,8 +13,7 @@ server_config = None
 def sharedpath(subpath):
     """Return a subpath of the configured shareddir."""
     if server_config is None:
-        if not os.path.exists(default_server_config_path):
-            raise ValueError("Cannot find configuration file at %s" % default_server_config_path)
+        assert os.path.exists(default_server_config_path), "Cannot find configuration file at %s" % default_server_config_path
 
         use_config(get_file_config(default_server_config_path))
 
