@@ -1,0 +1,5 @@
+ - [ ] closes #xxxx
+ - [ ] tests added / passed
+ - [ ] docs reflect changes
+ - [ ] passes ``flake8 impactlab_tools tests docs``
+ - [ ] whatsnew entry
