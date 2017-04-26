@@ -1,23 +1,31 @@
-"""Utilities for path handling
+"""
+Utilities for path handling
 
 Provides server-specific paths, configured in a server configuration file.
 """
 
-import sys, os, yaml
+import sys
+import os
+import yaml
 
 default_server_config_path = "../server.yml"
 server_config = None
 
-##### Path-handling functions
+
+# Path-handling functions
 
 def sharedpath(subpath):
     """Return a subpath of the configured shareddir."""
     if server_config is None:
-        assert os.path.exists(default_server_config_path), "Cannot find configuration file at %s" % default_server_config_path
+        msg = "Cannot find configuration file at {}".format(
+            default_server_config_path)
+
+        assert os.path.exists(default_server_config_path), msg
 
         use_config(get_file_config(default_server_config_path))
 
     return os.path.join(server_config['shareddir'], subpath)
+
 
 def configpath(path):
     """Return an configured absolute path.  If the path is absolute, it
@@ -29,7 +37,8 @@ def configpath(path):
 
     return sharedpath(path)
 
-### Configuration-file handling functions
+
+# Configuration-file handling functions
 
 def use_config(config):
     """Use the given configuration for path functions."""
@@ -42,6 +51,7 @@ def use_config(config):
 
     server_config = config
 
+
 def get_file_config(filepath):
     """Load a configuration file from a given path."""
 
@@ -49,15 +59,19 @@ def get_file_config(filepath):
         config = yaml.load(fp)
         return config
 
+
 def get_argv_config(index=1):
-    """Load a configuration file specified as the `index` argv argument.
-    In the future, this should also load specific configurable options from the command-line.
+    """
+    Load a configuration file specified as the `index` argv argument.
+
+    In the future, this should also load specific configurable options from the
+    command-line.
     """
 
     with open(sys.argv[index], 'r') as fp:
         config = yaml.load(fp)
         return config
 
+
 if __name__ == '__main__':
     print configpath('testing')
-

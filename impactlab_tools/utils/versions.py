@@ -22,8 +22,10 @@ def check_version(input_list, check_git=False):
     dict:
         A dictionary of the modules: keys are the module names, each
         key has value of another dictionary, containing:
+
             - "source": how is the module installed ("pip", "local",
               "git", or None):
+
                 - source is "pip" if it's an open-sourced python
                   package installed through pip.
                 - source is "pip-local" if it's a self-made tool
@@ -31,6 +33,7 @@ def check_version(input_list, check_git=False):
                 - source is "git" if it's a git managed repo of
                   scripts, not installed through pip.
                 - source is None if the module cannot be found.
+
             - "version": If it's an open source module (source: pip),
               this is the version numbers of it.
             - "git_hash": If it's a local module (source: local, or
