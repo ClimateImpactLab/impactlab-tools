@@ -4,7 +4,7 @@ What's New
 These are new features and improvements of note in each release.
 
 v0.1.0 (Development Version)
---------------------------
+----------------------------
 
   - add tests, doctests, docs build tests, codacy, codecov (:issue:`3`)
   - docs now build, whatsnew added (:issue:`4`)
