@@ -1,5 +1,8 @@
-impactlab_tools package
-=======================
+
+.. _impactlab-tools-api:
+
+impactlab-tools API
+===================
 
 Subpackages
 -----------
