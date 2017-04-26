@@ -74,4 +74,4 @@ def get_argv_config(index=1):
 
 
 if __name__ == '__main__':
-    print configpath('testing')
+    print(configpath('testing'))
