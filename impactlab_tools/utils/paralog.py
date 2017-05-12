@@ -48,6 +48,8 @@ class StatusManager(object):
         self.exclusive_jobnames = exclusive_jobnames
         
         # Decide on the name of the log file
+        if not os.path.exists(logdir):
+            os.makedirs(logdir)
         for ii in itertools.count():
             logpath = os.path.join(logdir, "%s-%d.log" % (jobname, ii))
             if not os.path.exists(logpath):
