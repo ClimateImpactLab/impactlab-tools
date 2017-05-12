@@ -58,7 +58,7 @@ class StatusManager(object):
 
         # Grab all std out
         self.sys_stdout = sys.stdout
-        sys.stdout = open(self.logpath, 'w')
+        sys.stdout = DoubleLogger(self.logpath)
 
     def __del__(self):
         """Usually not used; allow std output to go back to its previous stream."""
@@ -124,7 +124,26 @@ class StatusManager(object):
             os.kill(pid, signal.SIGTERM)
 
         os.remove(filepath)
+
+class DoubleLogger(object):
+    """From http://stackoverflow.com/questions/14906764/how-to-redirect-stdout-to-both-file-and-console-with-scripting"""
+    def __init__(self, logpath):
+        self.terminal = sys.stdout
+        self.log = open(logpath, "a")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+
+    def close(self):
+        self.log.close()
             
+    def flush(self):
+        #this flush method is needed for python 3 compatibility.
+        #this handles the flush command by doing nothing.
+        #you might want to specify some extra behavior here.
+        pass
+        
 if __name__ == '__main__':
     statman1 = StatusManager('test', 'Testing process', '/shares/gcp/temp', 60*60)
     print statman1.logpath
