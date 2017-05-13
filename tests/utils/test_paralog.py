@@ -1,4 +1,3 @@
-import pytest
 import shutil
 from impactlab_tools.utils import paralog
 

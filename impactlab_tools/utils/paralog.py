@@ -27,10 +27,10 @@ Usage:
    to the cross-job status file.
 """
 
-import sys, os, glob, itertools, time, signal
+import sys, os, itertools, time, signal
 
 class StatusManager(object):
-    def __init__(self, jobname, jobtitle, logdir, timeout, exclusive_jobnames=[]):
+    def __init__(self, jobname, jobtitle, logdir, timeout, exclusive_jobnames=None):
         """
         Create a log file to capture all output, and set up to claim directories.
 
@@ -45,7 +45,7 @@ class StatusManager(object):
         self.jobname = jobname
         self.jobtitle = jobtitle
         self.timeout = timeout
-        self.exclusive_jobnames = exclusive_jobnames
+        self.exclusive_jobnames = exclusive_jobnames if exclusive_jobnames is not None else []
 
         # Decide on the name of the log file
         if not os.path.exists(logdir):
