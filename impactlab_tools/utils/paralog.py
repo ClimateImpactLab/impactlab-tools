@@ -67,8 +67,8 @@ class StatusManager(object):
 
     def claim(self, dirpath):
         """Claim a directory."""
-        if not os.path.exists(dirname):
-            os.makedirs(os.path.abspath(dirname))
+        if not os.path.exists(dirpath):
+            os.makedirs(os.path.abspath(dirpath))
         elif self.is_claimed(dirpath):
             return False
 
