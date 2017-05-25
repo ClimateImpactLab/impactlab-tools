@@ -36,12 +36,16 @@ Python tools for Climate Impact Lab developers
 Features
 --------
 
-
+* Out-of-the-box aggregation & weighting using Impactlab regions & datasets
+* Computes distributions across ACP and GCP models
+* Provides tools for using Climate Impact Lab server configuration files
+* Integrates seamlessly into pandas and xarray workflows
 
 
 Usage
 -----
 
+For detailed usage instructions, see the `readthedocs documentation <https://impactlab-tools.readthedocs.io/en/latest/>`_
 
 Installation
 ------------
@@ -49,9 +53,12 @@ Installation
 ``pip install impactlab-tools``
 
 
-
 Requirements
 ------------
+
+This package requires python version 2.7 or python 3 (3.4 or higher).
+Installing with pip will ensure all dependencies are installed correctly.
+
 
 Latest Release Notes
 --------------------
