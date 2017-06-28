@@ -72,6 +72,28 @@ def get_argv_config(index=1):
         config = yaml.load(fp)
         return config
 
+def get_allargv_config():
+    config = {}
+    for arg in sys.argv:
+        if arg[-4:] == '.yml':
+            config.update(get_file_config(arg))
+            continue
 
+        if arg[0:2] == '--':
+            if '=' in arg:
+                chunks = arg[2:].split('=')
+                if chunks[0] == 'config':
+                    config = get_file_config(chunks[1])
+                else:
+                    config[chunks[0]] = yaml.load(chunks[1])
+            else:
+                config[arg[2:]] = True
+            continue
+        
+        config[arg] = True
+
+    return config
+                                                            
+    
 if __name__ == '__main__':
     print(configpath('testing'))
