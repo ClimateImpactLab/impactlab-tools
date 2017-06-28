@@ -71,15 +71,15 @@ def get_argv_config(index=1):
 
 def get_allargv_config():
     """
-    Load a configuration from the command line, merging all arguments into a single configuration dictionary.
+Load a configuration from the command line, merging all arguments into a single configuration dictionary.
 
-    Handles the following kinds of command-line arguments:
-     - *.yml: a full configuration YaML file, merged into the result dictionary
-     - --config=VALUE: a full configuration YaML file, as above
-     - --KEY=VALUE: a single configuration value to be set
-     - anything else: sets an entry in the config file for that anything to have a value of True
+Handles the following kinds of command-line arguments:
+- *.yml: a full configuration YaML file, merged into the result dictionary
+- --config=VALUE: a full configuration YaML file, as above
+- --KEY=VALUE: a single configuration value to be set
+- anything else: sets an entry in the config file for that anything to have a value of True
 
-    Later command-line arguments always overide earlier ones.
+Later command-line arguments always overide earlier ones.
     """
     config = {}
     for arg in sys.argv:
