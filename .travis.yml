@@ -46,7 +46,7 @@ script:
       python -m pytest;
       sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html;
     else
-      tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypypy/pypy/');
+      tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypy\(py\)\?\([0-9\.\-]\+\)\?/pypy/');
     fi
   
 deploy:
