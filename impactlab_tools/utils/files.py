@@ -43,6 +43,7 @@ def use_config(config):
     """Use the given configuration for path functions."""
     global server_config
 
+    # Add values from server_config only if not in config
     if server_config is not None:
         for key in server_config:
             if key not in config:
@@ -87,6 +88,7 @@ def get_allargv_config():
             config.update(get_file_config(arg))
             continue
 
+        # Add --key=value arguments one at a time
         if arg[0:2] == '--':
             if '=' in arg:
                 chunks = arg[2:].split('=')
@@ -101,6 +103,6 @@ def get_allargv_config():
         config[arg] = True
 
     return config
-                                                                
+
 if __name__ == '__main__':
     print(configpath('testing'))
