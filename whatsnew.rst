@@ -14,6 +14,7 @@ v0.1.0 (Development Version)
   - package dependencies pinned, pyup setup (:pull:`8`)
   - restructure docs and add sphinx-autoapi documentation (:issue:`15`)
   - minor formatting and bug fixes
+  - pypi version pinned in travis.yml
 
 
 See the issue tracker on GitHub for a complete list.
