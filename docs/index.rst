@@ -17,4 +17,5 @@ Contents
    readme
    whatsnew
    impactlab_tools
+   configuration
    contributing
