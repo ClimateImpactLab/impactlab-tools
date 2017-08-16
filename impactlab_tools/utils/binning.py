@@ -5,7 +5,7 @@ import scipy.stats
 from pandas import CategoricalIndex
 
 
-def binned_statistic_1d(da, dim, bins=10, statistic='count', range=None):
+def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
     '''
     Bin a data array by values and summarize along a dimension
 
@@ -56,9 +56,9 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', range=None):
         (nx = len(bins)-1).
 
 
-    range : (float, float) or [(float, float)], optional
-        The lower and upper range of the bins. If not provided, range is simply
-        (x.min(), x.max()). Values outside the range are ignored.
+    value_range : (float, float) or [(float, float)], optional
+        The lower and upper range of the bins. If not provided, value_range is
+        simply (x.min(), x.max()). Values outside the range are ignored.
 
     Returns
     -------
@@ -120,12 +120,12 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', range=None):
         da.values,
         bins=bins,
         statistic=statistic,
-        range=range)
+        range=value_range)
 
     if isinstance(bins, int):
-        if range is None:
-            range = float(da.min()), float(da.max())
-        bins = np.linspace(range[0], range[1], bins+1)
+        if value_range is None:
+            value_range = float(da.min()), float(da.max())
+        bins = np.linspace(value_range[0], value_range[1], bins+1)
 
     # build index for new array
     bindex = CategoricalIndex(
