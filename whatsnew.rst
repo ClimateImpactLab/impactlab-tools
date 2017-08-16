@@ -3,7 +3,12 @@ What's New
 
 These are new features and improvements of note in each release.
 
-v0.1.0 (Development Version)
+v0.0.6 (Current Version)
+------------------------
+
+  - add bin-by-value function (see :py:func:`impactlab_tools.utils.binning.binned_statistic_1d`)
+
+v0.0.5 (February 23, 2017)
 ----------------------------
 
   - add tests, doctests, docs build tests, codacy, codecov (:issue:`3`)
