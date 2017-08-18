@@ -3,10 +3,16 @@ What's New
 
 These are new features and improvements of note in each release.
 
-v0.0.6 (Current Version)
+v0.0.7 (Current version)
 ------------------------
 
-  - add bin-by-value function (see :py:func:`impactlab_tools.utils.binning.binned_statistic_1d`)
+  - fix bug causing docs to fail when importing conda packages (:issue:`67`)
+  - add missing documentation for utils.binning module (finalizes :issue:`59`)
+
+v0.0.6 (August 16, 2017)
+------------------------
+
+  - add bin-by-value function (see :py:func:`impactlab_tools.utils.binning.binned_statistic_1d`) (:issue:`59`)
 
 v0.0.5 (February 23, 2017)
 ----------------------------
