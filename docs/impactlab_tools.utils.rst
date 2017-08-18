@@ -4,6 +4,14 @@ impactlab_tools.utils package
 Submodules
 ----------
 
+impactlab_tools.utils.binning module
+------------------------------------
+
+.. automodule:: impactlab_tools.utils.binning
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 impactlab_tools.utils.cache module
 ----------------------------------
 
