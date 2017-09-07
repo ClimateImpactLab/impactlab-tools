@@ -111,4 +111,5 @@ def gcp_quantiles(
     # swap weights coordinate to use model names from data
     sample_weight.coords[dim] = models_in_data
 
-    weighted_quantile_xr(data, quantiles, sample_weight=sample_weight, dim=dim)
+    return weighted_quantile_xr(
+        data, quantiles, sample_weight=sample_weight, dim=dim)
