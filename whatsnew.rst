@@ -8,6 +8,8 @@ v0.0.7 (Current version)
 
   - fix bug causing docs to fail when importing conda packages (:issue:`67`)
   - add missing documentation for utils.binning module (finalizes :issue:`59`)
+  - add :py:func:`impactlab_tools.gcp.dist.gcp_quantiles` function (:issue:`16`)
+  - allow :py:func:`~impactlab_tools.utils.weighting.weighted_quantiles_xr` to broadcast across variables in a dataset (:issue:`78`)
 
 v0.0.6 (August 16, 2017)
 ------------------------
