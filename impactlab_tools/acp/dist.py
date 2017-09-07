@@ -17,34 +17,34 @@ def acp_quantiles(
 
     .. NOTE ::
 
-        quantiles should be in [0, 1]!
+        This function does not control for the number of samples of each model.
+        If they are not constant across models provide a correctly weighted
+        weights array to :py:func:`utils.weighting.weighted_quantile_xr`.
+        We would like to fix this. If you have a good fix we'd love a PR :)
 
     Parameters
     ----------
 
     data : DataArray
-
-        xarray.DataArray with data
+        :py:class:`xarray.DataArray` or :py:class:`xarray.Dataset` with data
+        indexed by ACP model along the dimension ``dim``. If a Dataset is
+        passed, ``acp_quantiles`` computes the weighted quantile for each
+        variable in the ``Dataset`` that is indexed by ``dim``.
 
     rcp : str
-
         RCP weights/models to use ('rcp26', 'rcp45', 'rcp60', 'rcp85')
 
     quantiles : array-like
-
-        quantiles of distribution to return
+        quantiles of distribution to return. quantiles should be in [0, 1].
 
     values_sorted : bool
-
         if True, then will avoid sorting of initial array
 
     dim : str
-
         dimension along which to retrieve quantiles. The indices of this
-        dimension should be valid ACP climate models.
+        dimension should be valid ACP climate models. Default: `'model'`.
 
     api : object
-
         DataFS API object to use in data retrieval (optional, uses default
         profile if not provided)
 
@@ -52,17 +52,22 @@ def acp_quantiles(
     Returns
     -------
 
-    xarray.DataArray
-
-        computed quantiles from weighted distribution
+    DataArray or Dataset
+        returns a new :py:class:`~xarray.DataArray` or
+        :py:class:`~xarray.Dataset` with quantiles computed from weighted
+        distribution along a new dimension ``quantile`` and dimension ``dim``
+        dropped.
 
     See also
     --------
 
+    * :py:func:`.gcp.dist.gcp_quantiles`
     * :py:func:`.utils.weighting.weighted_quantile_xr`
     * :py:func:`.utils.weighting.weighted_quantile`
     * :py:func:`.utils.weighting.weighted_quantile_1d`
     * :py:func:`numpy.percentile`
+    * :py:meth:`xarray.Dataset.quantile`
+    * :py:meth:`xarray.DataArray.quantile`
     * :py:meth:`pandas.DataFrame.quantile`
     * :py:meth:`pandas.Series.quantile`
 
