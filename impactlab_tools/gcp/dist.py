@@ -1,19 +1,42 @@
 
 from __future__ import absolute_import
 
+import xarray as xr
+import pandas as pd
+import numpy as np
+import toolz
+
+import datafs
+
 from impactlab_tools.utils.weighting import weighted_quantile_xr
-from impactlab_tools.utils.cache import DataCache
 
 
-def acp_quantiles(
+@toolz.memoize(
+    key=lambda args, kwargs:
+        kwargs.get('version', tuple([]) if len(args) == 0 else args[0]))
+def get_weights(version='1.0', api=None):
+
+    if api is None:
+        api = datafs.get_api()
+
+    arch = api.get_archive('/GCP/climate/gcm-modelweights.nc')
+
+    with arch.get_local_path(version=version) as f:
+        with xr.open_dataset(f) as ds:
+            ds.load()
+
+    return ds
+
+
+def gcp_quantiles(
         data,
         rcp,
-        quantiles=[0.05, 0.167, 0.5, 0.833, 0.95],
+        quantiles=[0.05, 0.17, 0.5, 0.83, 0.95],
         values_sorted=False,
         dim='model',
         api=None):
     """
-    Compute quantiles of an xarray distribution using ACP weights
+    Compute quantiles of an xarray distribution using GCP weights
 
     .. NOTE ::
 
@@ -25,14 +48,14 @@ def acp_quantiles(
     Parameters
     ----------
 
-    data : DataArray
+    data : DataArray or Dataset
         :py:class:`xarray.DataArray` or :py:class:`xarray.Dataset` with data
-        indexed by ACP model along the dimension ``dim``. If a Dataset is
-        passed, ``acp_quantiles`` computes the weighted quantile for each
+        indexed by GCP model along the dimension ``dim``. If a Dataset is
+        passed, ``gcp_quantiles`` computes the weighted quantile for each
         variable in the ``Dataset`` that is indexed by ``dim``.
 
     rcp : str
-        RCP weights/models to use ('rcp26', 'rcp45', 'rcp60', 'rcp85')
+        RCP weights/models to use ('rcp45', 'rcp85')
 
     quantiles : array-like
         quantiles of distribution to return. quantiles should be in [0, 1].
@@ -40,9 +63,10 @@ def acp_quantiles(
     values_sorted : bool
         if True, then will avoid sorting of initial array
 
-    dim : str
+    dim : str, optional
         dimension along which to retrieve quantiles. The indices of this
-        dimension should be valid ACP climate models. Default: `'model'`.
+        dimension should be valid (case insensitive) GCP climate models.
+        Default: `'model'`.
 
     api : object
         DataFS API object to use in data retrieval (optional, uses default
@@ -61,7 +85,7 @@ def acp_quantiles(
     See also
     --------
 
-    * :py:func:`.gcp.dist.gcp_quantiles`
+    * :py:func:`.acp.dist.acp_quantiles`
     * :py:func:`.utils.weighting.weighted_quantile_xr`
     * :py:func:`.utils.weighting.weighted_quantile`
     * :py:func:`.utils.weighting.weighted_quantile_1d`
@@ -73,12 +97,19 @@ def acp_quantiles(
 
     """
 
-    mw = DataCache.retrieve('ACP_climate_gcm-modelweights.csv').xs(
-        rcp, level='rcp')['weight_corrected']
+    # prep weight
+    sample_weight = get_weights(api=api).sel(rcp=rcp, drop=True).weight
+    sample_weight = sample_weight.rename({'model': dim})
+    
+    # prepare arrays of models to align along `dim` (case insensitive)
+    models_in_data = data.coords[dim].values
+    models_in_data_aligned = np.array([m.lower() for m in models_in_data])
+
+    # align weights to match ordering of models (using lowercase models)
+    sample_weight = sample_weight.sel(**{dim: models_in_data_aligned})
+
+    # swap weights coordinate to use model names from data
+    sample_weight.coords[dim] = models_in_data
 
     return weighted_quantile_xr(
-        data=data,
-        quantiles=quantiles,
-        sample_weight=mw,
-        values_sorted=False,
-        dim=dim)
+        data, quantiles, sample_weight=sample_weight, dim=dim)
