@@ -8,6 +8,7 @@ v0.0.7 (Current version)
 
   - fix bug causing docs to fail when importing conda packages (:issue:`67`)
   - add missing documentation for utils.binning module (finalizes :issue:`59`)
+  - add reindexing functions :py:func:`impactlab_tools.gcp.reindex.shapenum_to_hierid` and :py:func:`impactlab_tools.gcp.reindex.hierid_to_shapenum` (:issue:`80`)
 
 v0.0.6 (August 16, 2017)
 ------------------------
