@@ -24,9 +24,10 @@ def weighted_quantile_xr(
     Parameters
     ----------
 
-    data : DataArray
+    data : DataArray or Dataset
 
-        xarray.DataArray with data
+        :py:class:`xarray.DataArray` or :py:class`xarray.Dataset` with data
+        indexed by ``dim``
 
     quantiles : array-like
 
@@ -52,6 +53,28 @@ def weighted_quantile_xr(
         computed quantiles from weighted distribution
 
     """
+    if hasattr(data, 'data_vars'):
+        res = xr.Dataset()
+        for var in data.data_vars.keys():
+            if dim in data[var].dims:
+                res[var] = _weighted_quantile_xr_da(
+                    data[var], quantiles, sample_weight, dim, values_sorted)
+            else:
+                res[var] = data[var]
+
+        return res
+
+    else:
+        return _weighted_quantile_xr_da(
+            data, quantiles, sample_weight, dim, values_sorted)
+
+
+def _weighted_quantile_xr_da(
+        data,
+        quantiles,
+        sample_weight,
+        dim,
+        values_sorted=False):
 
     axis = data.get_axis_num(dim)
     dims = list(data.dims[:axis]) + ['quantile'] + list(data.dims[axis+1:])
