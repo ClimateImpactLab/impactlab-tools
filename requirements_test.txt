@@ -1,7 +1,7 @@
 Sphinx==1.6.3
 sphinx-rtd-theme==0.2.5b1
 pip==9.0.1
-wheel==0.29.0
+wheel==0.30.0
 flake8==3.4.1
 tox==2.7.0
 coverage==4.4.1
