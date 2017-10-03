@@ -10,6 +10,7 @@ Subpackages
 .. toctree::
 
     impactlab_tools.acp
+    impactlab_tools.gcp
     impactlab_tools.utils
 
 Module contents

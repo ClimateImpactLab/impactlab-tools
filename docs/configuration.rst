@@ -1,5 +1,5 @@
-Optional :code:`files` configuration system
-=====================================
+Optional ``files`` configuration system
+=======================================
 
 The :code:`impactlab_tools` repository contains a general system for passing
 configuration information to scripts, and this is used by a few of the
