@@ -73,23 +73,35 @@ class StatusManager(object):
             return False
 
         status_path = StatusManager.claiming_filepath(dirpath, self.jobname)
-        with open(status_path, 'w') as fp:
-            fp.write("%d %s: %s\n" % (os.getpid(), self.jobtitle, self.logpath))
+        try:
+            with open(status_path, 'w') as fp:
+                fp.write("%d %s: %s\n" % (os.getpid(), self.jobtitle, self.logpath))
+        except:
+            return False # Writing error: cannot calim directory
 
         return True
 
     def update(self, dirpath, status):
         """Provide additional status information."""
         status_path = StatusManager.claiming_filepath(dirpath, self.jobname)
-        with open(status_path, 'a') as fp:
-            fp.write(status + '\n')
+        try:
+            with open(status_path, 'a') as fp:
+                fp.write(status + '\n')
+        except:
+            print "Warning: Could write status update %s" % status
 
     def release(self, dirpath, status):
         """Release the claim on this directory."""
-        os.remove(StatusManager.claiming_filepath(dirpath, self.jobname))
+        try:
+            os.remove(StatusManager.claiming_filepath(dirpath, self.jobname))
+        except:
+            print "Warning: Could not release directory."
 
-        with open(StatusManager.globalstatus_filepath(dirpath), 'a') as fp:
-            fp.write("%s %s: %s\n" % (time.asctime(), self.jobtitle, status))
+        try:
+            with open(StatusManager.globalstatus_filepath(dirpath), 'a') as fp:
+                fp.write("%s %s: %s\n" % (time.asctime(), self.jobtitle, status))
+        except:
+            print "Warning: Could write release status %s" % status
 
     def is_claimed(self, dirname):
         """Check if a directory has claims from any of our jobs."""
