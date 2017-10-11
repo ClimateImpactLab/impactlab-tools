@@ -81,17 +81,23 @@ def check_version(input_list, check_git=False):
             ind = mod.index("=")
             modules[mod[:ind]] = mod[ind:].rstrip("\n").lstrip("=")
 
-    # Read in all repos under my home directory
-    repos = sp.check_output(
-        "find ~/ -name '.git'", shell=True).split(".git\n")[:-1]
-
     git = {}
-    for repo in repos:
-        name = repo.split("/")[-2]
-        git[name] = sp.check_output(
-            "cd " + repo + " && git log --format='%H' -n 1",
-            shell=True).rstrip("\n")
+    if check_git:
+        # Read in all repos under my home directory
+        repos = sp.check_output(
+            "find ~/ -name '.git'", shell=True).split(".git\n")[:-1]
 
+        for repo in repos:
+            name = repo.split("/")[-2]
+            git[name] = sp.check_output(
+                "cd " + repo + " && git log --format='%H' -n 1",
+                shell=True).rstrip("\n")
+
+    if 'self' in input_list:
+        version = sp.check_output("git log --format='%H' -n 1", shell=True).rstrip("\n")
+        if "\n" not in version:
+            git['self'] = version
+            
     # Iterate through the input_list and find if the target is in
     # either the modules or the git dictionary, or not at all.
     rtDict = {}
@@ -112,3 +118,7 @@ def check_version(input_list, check_git=False):
         rtDict[tgt] = info
 
     return rtDict
+
+if __name__ == '__main__':
+    print check_version(['self', 'impact-calculations', 'metacsv', 'impactlab-tools', 'scipy', 'open-estimate'])
+    
