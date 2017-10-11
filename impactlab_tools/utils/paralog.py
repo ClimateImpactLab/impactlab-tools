@@ -56,9 +56,12 @@ class StatusManager(object):
                 self.logpath = logpath
                 break
 
-        # Record this process in the master log
-        with open(os.path.join(logdir, "master.log"), 'a') as fp:
-            fp.write("%s %s: %d %s\n" % (time.asctime(), self.jobtitle, os.getpid(), self.logpath))
+        try:
+            # Record this process in the master log
+            with open(os.path.join(logdir, "master.log"), 'a') as fp:
+                fp.write("%s %s: %d %s\n" % (time.asctime(), self.jobtitle, os.getpid(), self.logpath))
+        except:
+            print "Warning: Could not append to master log."
             
         # Grab all std out
         self.sys_stdout = sys.stdout
@@ -71,8 +74,6 @@ class StatusManager(object):
 
     def claim(self, dirpath):
         """Claim a directory."""
-        status_path = StatusManager.claiming_filepath(dirpath, self.jobname)
-
         if not os.path.exists(dirpath):
             os.makedirs(os.path.abspath(dirpath))
         elif self.is_claimed(dirpath):
