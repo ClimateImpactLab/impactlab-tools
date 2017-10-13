@@ -11,7 +11,7 @@ import toolz
 
 def get_shape():
     
-    return '../assets/hierid_regions'
+    return 'assets/hierid_regions'
     
 
 @toolz.memoize
