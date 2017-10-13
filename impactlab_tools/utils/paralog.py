@@ -61,7 +61,7 @@ class StatusManager(object):
             with open(os.path.join(logdir, "master.log"), 'a') as fp:
                 fp.write("%s %s: %d %s\n" % (time.asctime(), self.jobtitle, os.getpid(), self.logpath))
         except:
-            print "Warning: Could not append to master log."
+            print("Warning: Could not append to master log.")
             
         # Grab all std out
         self.sys_stdout = sys.stdout
@@ -95,20 +95,20 @@ class StatusManager(object):
             with open(status_path, 'a') as fp:
                 fp.write(status + '\n')
         except:
-            print "Warning: Could write status update %s" % status
+            print("Warning: Could write status update %s" % status)
 
     def release(self, dirpath, status):
         """Release the claim on this directory."""
         try:
             os.remove(StatusManager.claiming_filepath(dirpath, self.jobname))
         except:
-            print "Warning: Could not release directory."
+            print("Warning: Could not release directory.")
 
         try:
             with open(StatusManager.globalstatus_filepath(dirpath), 'a') as fp:
                 fp.write("%s %s: %s\n" % (time.asctime(), self.jobtitle, status))
         except:
-            print "Warning: Could write release status %s" % status
+            print("Warning: Could write release status %s" % status)
 
     def is_claimed(self, dirname):
         """Check if a directory has claims from any of our jobs."""
