@@ -40,7 +40,7 @@ extras = {
 
 setup(
     name='impactlab-tools',
-    version='0.1.0',
+    version='0.2.0',
     description="Python tools for Climate Impact Lab developers",
     long_description=readme,
     author="Climate Impact Lab",
