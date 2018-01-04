@@ -1,11 +1,11 @@
 Sphinx==1.6.5
-sphinx-rtd-theme==0.2.5b1
+sphinx-rtd-theme==0.2.5b2
 pip==9.0.1
 wheel==0.30.0
 flake8==3.5.0
 tox==2.9.1
 coverage==4.4.2
-pytest==3.2.3
+pytest==3.3.1
 pytest-cov==2.5.1
-pytest-runner==2.12.1
+pytest-runner==3.0
 coveralls==1.2.0
