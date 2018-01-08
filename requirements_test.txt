@@ -1,4 +1,4 @@
-Sphinx==1.6.5
+Sphinx==1.6.6
 sphinx-rtd-theme==0.2.5b2
 pip==9.0.1
 wheel==0.30.0
