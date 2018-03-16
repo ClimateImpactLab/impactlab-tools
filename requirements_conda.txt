@@ -7,7 +7,7 @@ numba==0.36.2
 blaze==0.10.1
 scipy==1.0.0
 bottleneck==1.2.1
-dask==0.16.0
+dask==0.17.1
 basemap==1.0.7
 matplotlib==2.2.0
 
