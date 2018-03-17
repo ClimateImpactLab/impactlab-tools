@@ -9,6 +9,6 @@ scipy==1.0.0
 bottleneck==1.2.1
 dask==0.17.1
 basemap==1.0.7
-matplotlib==2.2.0
+matplotlib==2.2.2
 
 
