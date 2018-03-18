@@ -43,7 +43,8 @@ setup(
     long_description=readme,
     author="Climate Impact Lab",
     url='https://github.com/ClimateImpactLab/impactlab-tools',
-    packages=find_packages(exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
+    packages=find_packages(
+        exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
     package_dir={'impactlab_tools':
                  'impactlab_tools'},
     package_data={
