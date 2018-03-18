@@ -3,25 +3,23 @@ import xarray as xr
 import numpy as np
 import toolz
 
-import datafs
+try:
+    unicode
+except NameError:
+    unicode = str
 
 
-@toolz.memoize(key=lambda args, kwargs: tuple([]))
-def _get_impactregion_mapping(api=None):
-    if api is None:
-        api = datafs.get_api()
+@toolz.memoize
+def _get_impactregion_mapping():
+    with xr.open_dataset(
+            'impactlab_tools/assets/GCP_impact_regions.nc') as mapping:
 
-    arch = api.get_archive('/GCP/regions/impact-regions/shapenum.nc')
+        mapping.load()
 
-    with arch.get_local_path() as f:
-        with xr.open_dataset(f) as ds:
-            ds.load()
-
-    return ds
+    return mapping
 
 
-def shapenum_to_hierid(
-        data, dim='SHAPENUM', new_dim='hierid', inplace=False, api=None):
+def shapenum_to_hierid(data, dim='SHAPENUM', new_dim='hierid', inplace=False):
     '''
     Re-indexes a DataArray or Dataset from SHAPENUM to hierid
     using agglomerated-world-new region definitions
@@ -42,10 +40,6 @@ def shapenum_to_hierid(
     inplace : bool, optional
         Modify the Dataset or DataArray in place rather than
         returning a copy (default False)
-
-    api : object, optional
-        :py:class:`datafs.DataAPI` object to pull mapping from
-        (by default an api object with default settings is created)
 
     Returns
     -------
@@ -71,7 +65,7 @@ def shapenum_to_hierid(
         <xarray.Dataset>
         Dimensions:  (hierid: 24378)
         Coordinates:
-          * hierid   (hierid) |S35 'CAN.1.2.28' 'CAN.1.17.403' ...
+          * hierid   (hierid) ...
         Data variables:
             var1     (hierid) float64 0.417 0.7203 0.0001144 0.3023 0.1468 ...
 
@@ -79,7 +73,7 @@ def shapenum_to_hierid(
         True
 
     '''
-    mapping = _get_impactregion_mapping(api=api)
+    mapping = _get_impactregion_mapping()
 
     if inplace:
         res = data
@@ -101,8 +95,7 @@ def shapenum_to_hierid(
     return res
 
 
-def hierid_to_shapenum(
-        data, dim='hierid', new_dim='SHAPENUM', inplace=False, api=None):
+def hierid_to_shapenum(data, dim='hierid', new_dim='SHAPENUM', inplace=False):
     '''
     Re-indexes a DataArray or Dataset from hierid to SHAPENUM
     using agglomerated-world-new region definitions
@@ -123,10 +116,6 @@ def hierid_to_shapenum(
     inplace : bool, optional
         Modify the Dataset or DataArray in place rather than
         returning a copy (default False)
-
-    api : object, optional
-        :py:class:`datafs.DataAPI` object to pull mapping from
-        (by default an api object with default settings is created)
 
     Returns
     -------
@@ -165,7 +154,8 @@ def hierid_to_shapenum(
         True
 
     '''
-    mapping = _get_impactregion_mapping(api=api)
+    mapping = _get_impactregion_mapping()
+    mapping.hierid.values = mapping.hierid.values.astype(unicode)
 
     if inplace:
         res = data
@@ -178,7 +168,7 @@ def hierid_to_shapenum(
 
     res.coords[dim] = (
         mapping
-        .sel(hierid=res.coords[dim])
+        .sel(hierid=res.coords[dim].astype(unicode))
         .SHAPENUM.values)
 
     res = res.rename({dim: new_dim})
