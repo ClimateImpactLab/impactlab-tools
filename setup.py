@@ -7,7 +7,6 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 requirements_install = [
-    'datafs>=0.6.9'
     ]
 
 requirements_test = [
@@ -28,8 +27,7 @@ requirements_conda = [
     'numpy>=1.7',
     'pandas>=0.15',
     'netCDF4>=1.1',
-    'xarray>=0.8',
-    'metacsv>=0.0.16'
+    'xarray>=0.8'
 ]
 
 extras = {
