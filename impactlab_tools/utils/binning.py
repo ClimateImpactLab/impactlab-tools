@@ -78,10 +78,10 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
         ...
         >>> da # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
         <xarray.DataArray (a: 4, b: 4)>
-        array([[ 0,  1,  2,  3],
-               [ 4,  5,  6,  7],
-               [ 8,  9, 10, 11],
-               [12, 13, 14, 15]])
+        array([[  0,  1,  2,  3],
+               [  4,  5,  6,  7],
+               [  8,  9, 10, 11],
+               [ 12, 13, 14, 15]])
         Coordinates:
           * a        (a) ... 'a' 'b' 'c' 'd'
           * b        (b) ... 'w' 'x' 'y' 'z'
@@ -90,10 +90,10 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
         ...     da, 'b', [0, 2, 5, 20])
         ...     # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
         <xarray.DataArray (a: 4, groups: 3)>
-        array([[2., 2., 0.],
-               [0., 1., 3.],
-               [0., 0., 4.],
-               [0., 0., 4.]])
+        array([[ 2., 2., 0.],
+               [ 0., 1., 3.],
+               [ 0., 0., 4.],
+               [ 0., 0., 4.]])
         Coordinates:
           * a        (a) ... 'a' 'b' 'c' 'd'
           * groups   (groups) object '(0, 2]' '(2, 5]' '(5, 20]'
@@ -102,16 +102,16 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
         ...     da, 'a', statistic='sum')
         ...     # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
         <xarray.DataArray (groups: 10, b: 4)>
-        array([[ 0.,  1.,  2.,  3.],
-               [ 0.,  0.,  0.,  0.],
-               [ 0.,  0.,  0.,  0.],
-               [ 4.,  5.,  6.,  7.],
-               [ 0.,  0.,  0.,  0.],
-               [ 0.,  0.,  0.,  0.],
-               [ 8.,  9., 10., 11.],
-               [ 0.,  0.,  0.,  0.],
-               [ 0.,  0.,  0.,  0.],
-               [12., 13., 14., 15.]])
+        array([[  0.,  1.,  2.,  3.],
+               [  0.,  0.,  0.,  0.],
+               [  0.,  0.,  0.,  0.],
+               [  4.,  5.,  6.,  7.],
+               [  0.,  0.,  0.,  0.],
+               [  0.,  0.,  0.,  0.],
+               [  8.,  9., 10., 11.],
+               [  0.,  0.,  0.,  0.],
+               [  0.,  0.,  0.,  0.],
+               [ 12., 13., 14., 15.]])
         Coordinates:
           * groups   (groups) object '(0.0, 1.5]' '(1.5, 3.0]' '(3.0, 4.5]' ...
           * b        (b) ... 'w' 'x' 'y' 'z'
