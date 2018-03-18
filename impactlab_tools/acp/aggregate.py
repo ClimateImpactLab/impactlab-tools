@@ -1,5 +1,11 @@
 
+from __future__ import absolute_import
+
 import xarray as xr
+import os
+
+import impactlab_tools.assets
+
 
 def population_weighted_mean(
         ds,
@@ -41,7 +47,11 @@ def population_weighted_mean(
     '''
 
     if pop is None:
-        with xr.open_dataset('../assets/ACP_county_census_pop.nc') as pop:
+        with xr.open_dataset(
+            os.path.join(
+                os.path.dirname(impactlab_tools.assets.__file__),
+                'ACP_county_census_pop.nc')) as pop:
+
             return pop.load()
 
         if dim != 'fips':

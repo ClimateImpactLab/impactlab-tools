@@ -5,6 +5,9 @@ import xarray as xr
 import pandas as pd
 import numpy as np
 import toolz
+import os
+
+import impactlab_tools.assets
 
 from pandas import IndexSlice as idx
 
@@ -16,11 +19,11 @@ def get_weights(project='gcp', rcp='rcp85'):
 
     da = (
         pd.read_csv(
-            '../assets/weights_{}.csv'.format(project),
-            index_col=[0, 1])
-        .weight
-        .loc[idx[rcp, :], :]
-        .reset_index('rcp', drop=True)        
+            os.path.join(
+                os.path.dirname(impactlab_tools.assets.__file__),
+                'weights_{}.csv'.format(project)),
+            index_col=[0, 1])['weight']
+        .xs(rcp, level='rcp')
         .to_xarray())
 
     return da

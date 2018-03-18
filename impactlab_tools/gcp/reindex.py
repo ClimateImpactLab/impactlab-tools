@@ -1,7 +1,12 @@
 
+from __future__ import absolute_import
+
 import xarray as xr
 import numpy as np
 import toolz
+import os
+
+import impactlab_tools.assets
 
 try:
     unicode
@@ -12,7 +17,10 @@ except NameError:
 @toolz.memoize
 def _get_impactregion_mapping():
     with xr.open_dataset(
-            'impactlab_tools/assets/GCP_impact_regions.nc') as mapping:
+            os.path.join(
+                os.path.dirname(impactlab_tools.assets.__file__),
+                'GCP_impact_regions.nc')
+            ) as mapping:
 
         mapping.load()
 
