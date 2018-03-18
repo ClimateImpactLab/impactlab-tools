@@ -1,19 +1,25 @@
+
+from __future__ import absolute_import
+
 import shutil
 from impactlab_tools.utils import paralog
 
 def test_claiming():
     statman1 = paralog.StatusManager('test', 'Testing process', 'testing-paralog', 60*60)
     print(statman1.logpath)
-    assert statman1.claim("testing-paralog"), "Cannot claim directory!"
+    if not statman1.claim("testing-paralog"):
+        raise IOError("Cannot claim directory!")
 
     statman2 = paralog.StatusManager('test', 'Testing process', 'testing-paralog', 60*60)
     print(statman2.logpath)
-    assert not statman2.claim("testing-paralog"), "Accidentally claimed directory!"
+    if statman2.claim("testing-paralog"):
+        raise IOError("Accidentally claimed directory!")
 
     statman1.update("testing-paralog", "New status.")
     statman1.release("testing-paralog", "First pass complete.")
 
-    assert statman2.claim("testing-paralog"), "Cannot claim directory afterwards!"
+    if not statman2.claim("testing-paralog"):
+        raise IOError("Cannot claim directory afterwards!")
 
     statman2.release("testing-paralog", "Second pass complete.")
 

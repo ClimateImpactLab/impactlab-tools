@@ -1,29 +1,9 @@
 
 from __future__ import absolute_import
 
-import pandas as pd
 import numpy as np
-import toolz
-import os
 
-import impactlab_tools.assets
-
-from impactlab_tools.utils.weighting import weighted_quantile_xr
-
-
-@toolz.memoize
-def get_weights(project='acp', rcp='rcp85'):
-
-    da = (
-        pd.read_csv(
-            os.path.join(
-                os.path.dirname(impactlab_tools.assets.__file__),
-                'weights_{}.csv'.format(project)),
-            index_col=[0, 1])['weight']
-        .xs(rcp, level='rcp')
-        .to_xarray())
-
-    return da
+from impactlab_tools.utils.weighting import weighted_quantile_xr, _get_weights
 
 
 def acp_quantiles(
@@ -54,11 +34,12 @@ def acp_quantiles(
     rcp : str
         RCP weights/models to use ('rcp45', 'rcp85')
 
-    quantiles : array-like
+    quantiles : list-like, optional
         quantiles of distribution to return. quantiles should be in [0, 1].
+        Default [0.05, 0.17, 0.5, 0.83, 0.95].
 
-    values_sorted : bool
-        if True, then will avoid sorting of initial array
+    values_sorted : bool, optional
+        if True, then will avoid sorting of initial array. default False.
 
     dim : str, optional
         dimension along which to retrieve quantiles. The indices of this
@@ -90,7 +71,7 @@ def acp_quantiles(
     """
 
     # prep weight
-    sample_weight = get_weights(rcp=rcp)
+    sample_weight = _get_weights(project='acp', rcp=rcp)
     sample_weight = sample_weight.rename({'model': dim})
 
     # prepare arrays of models to align along `dim` (case insensitive)

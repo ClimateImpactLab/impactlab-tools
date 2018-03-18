@@ -1,4 +1,6 @@
 
+from __future__ import absolute_import
+
 import impactlab_tools.gcp.dist
 import xarray as xr
 import numpy as np
@@ -64,6 +66,11 @@ def test_gcp_quantiles():
         rcp='rcp85',
         quantiles=[0.1, 0.4, 0.7, 0.99])
 
-    assert len(da.dims) == 1
-    assert da.shape[0] == 4
-    assert da.mean(dim='quantile') == 1
+    if len(da.dims) != 1:
+        raise ValueError
+
+    if da.shape[0] != 4:
+        raise ValueError
+
+    if da.mean(dim='quantile') != 1:
+        raise ValueError

@@ -1,3 +1,6 @@
+
+from __future__ import absolute_import
+
 import xarray as xr
 import numpy as np
 import scipy.stats
@@ -81,14 +84,14 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
         array([[  0,  1,  2,  3],
                [  4,  5,  6,  7],
                [  8,  9, 10, 11],
-               [ 12, 13, 14, 15]])
+              ...12, 13, 14, 15]])
         Coordinates:
           * a        (a) ... 'a' 'b' 'c' 'd'
           * b        (b) ... 'w' 'x' 'y' 'z'
 
         >>> binned_statistic_1d(
         ...     da, 'b', [0, 2, 5, 20])
-        ...     # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+        ...     # doctest: +SKIP
         <xarray.DataArray (a: 4, groups: 3)>
         array([[ 2., 2., 0.],
                [ 0., 1., 3.],
@@ -111,7 +114,7 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
                [  8.,  9., 10., 11.],
                [  0.,  0.,  0.,  0.],
                [  0.,  0.,  0.,  0.],
-               [ 12., 13., 14., 15.]])
+              ...12., 13., 14., 15.]])
         Coordinates:
           * groups   (groups) object '(0.0, 1.5]' '(1.5, 3.0]' '(3.0, 4.5]' ...
           * b        (b) ... 'w' 'x' 'y' 'z'
