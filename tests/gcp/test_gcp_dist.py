@@ -5,6 +5,7 @@ import numpy as np
 
 import pytest
 
+
 @pytest.fixture
 def rcp85_models():
     return [
@@ -50,7 +51,7 @@ def test_gcp_quantiles_full(rcp85_models):
         dims=['model'],
         coords=[rcp85_models])
 
-    weighted = impactlab_tools.gcp.dist.gcp_quantiles(
+    impactlab_tools.gcp.dist.gcp_quantiles(
         test_da, rcp='rcp85', dim='model')
 
 
@@ -61,8 +62,8 @@ def test_gcp_quantiles():
             dims=['model'],
             coords=[['GFDL-ESM2G', 'MIROC-ESM-CHEM', 'surrogate_CanESM2_99']]),
         rcp='rcp85',
-        quantiles = [0.1, 0.4, 0.7, 0.99])
-    
+        quantiles=[0.1, 0.4, 0.7, 0.99])
+
     assert len(da.dims) == 1
     assert da.shape[0] == 4
     assert da.mean(dim='quantile') == 1

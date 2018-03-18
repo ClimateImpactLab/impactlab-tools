@@ -1,15 +1,12 @@
 
 from __future__ import absolute_import
 
-import xarray as xr
 import pandas as pd
 import numpy as np
 import toolz
 import os
 
 import impactlab_tools.assets
-
-from pandas import IndexSlice as idx
 
 from impactlab_tools.utils.weighting import weighted_quantile_xr
 
@@ -23,8 +20,7 @@ def get_weights(project='acp', rcp='rcp85'):
                 os.path.dirname(impactlab_tools.assets.__file__),
                 'weights_{}.csv'.format(project)),
             index_col=[0, 1])['weight']
-        .loc[idx[rcp, :], :]
-        .reset_index('rcp', drop=True)        
+        .xs(rcp, level='rcp')
         .to_xarray())
 
     return da
@@ -96,7 +92,7 @@ def acp_quantiles(
     # prep weight
     sample_weight = get_weights(rcp=rcp)
     sample_weight = sample_weight.rename({'model': dim})
-    
+
     # prepare arrays of models to align along `dim` (case insensitive)
     models_in_data = data.coords[dim].values
     models_in_data_aligned = np.array([m.lower() for m in models_in_data])

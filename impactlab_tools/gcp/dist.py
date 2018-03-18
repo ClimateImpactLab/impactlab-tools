@@ -1,15 +1,12 @@
 
 from __future__ import absolute_import
 
-import xarray as xr
 import pandas as pd
 import numpy as np
 import toolz
 import os
 
 import impactlab_tools.assets
-
-from pandas import IndexSlice as idx
 
 from impactlab_tools.utils.weighting import weighted_quantile_xr
 
@@ -95,7 +92,7 @@ def gcp_quantiles(
     # prep weight
     sample_weight = get_weights(rcp=rcp)
     sample_weight = sample_weight.rename({'model': dim})
-    
+
     # prepare arrays of models to align along `dim` (case insensitive)
     models_in_data = data.coords[dim].values
     models_in_data_aligned = np.array([m.lower() for m in models_in_data])
