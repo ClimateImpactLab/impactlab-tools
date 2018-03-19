@@ -92,7 +92,7 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
         >>> binned_statistic_1d(
         ...     da, 'b', [0, 2, 5, 20])
         ...     # doctest: +SKIP
-        <xarray.DataArray (a: 4, groups: 3)>
+        <xarray.DataArray (a: 4, goh realroups: 3)>
         array([[ 2., 2., 0.],
                [ 0., 1., 3.],
                [ 0., 0., 4.],
@@ -102,7 +102,7 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
           * groups   (groups) object '(0, 2]' '(2, 5]' '(5, 20]'
 
         >>> binned_statistic_1d(
-        ...     da, 'a', statistic='sum')
+        ...     da, 'a', statistic='sum').transpose('groups', 'b')
         ...     # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
         <xarray.DataArray (groups: 10, b: 4)>
         array([[  0.,  1.,  2.,  3.],
