@@ -1,31 +1,9 @@
 
 from __future__ import absolute_import
 
-import xarray as xr
-import pandas as pd
 import numpy as np
-import toolz
 
-import datafs
-
-from impactlab_tools.utils.weighting import weighted_quantile_xr
-
-
-@toolz.memoize(
-    key=lambda args, kwargs:
-        kwargs.get('version', tuple([]) if len(args) == 0 else args[0]))
-def get_weights(version='1.0', api=None):
-
-    if api is None:
-        api = datafs.get_api()
-
-    arch = api.get_archive('/GCP/climate/gcm-modelweights.nc')
-
-    with arch.get_local_path(version=version) as f:
-        with xr.open_dataset(f) as ds:
-            ds.load()
-
-    return ds
+from impactlab_tools.utils.weighting import weighted_quantile_xr, _get_weights
 
 
 def gcp_quantiles(
@@ -33,8 +11,7 @@ def gcp_quantiles(
         rcp,
         quantiles=[0.05, 0.17, 0.5, 0.83, 0.95],
         values_sorted=False,
-        dim='model',
-        api=None):
+        dim='model'):
     """
     Compute quantiles of an xarray distribution using GCP weights
 
@@ -68,11 +45,6 @@ def gcp_quantiles(
         dimension should be valid (case insensitive) GCP climate models.
         Default: `'model'`.
 
-    api : object
-        DataFS API object to use in data retrieval (optional, uses default
-        profile if not provided)
-
-
     Returns
     -------
 
@@ -98,9 +70,9 @@ def gcp_quantiles(
     """
 
     # prep weight
-    sample_weight = get_weights(api=api).sel(rcp=rcp, drop=True).weight
+    sample_weight = _get_weights(project='gcp', rcp=rcp)
     sample_weight = sample_weight.rename({'model': dim})
-    
+
     # prepare arrays of models to align along `dim` (case insensitive)
     models_in_data = data.coords[dim].values
     models_in_data_aligned = np.array([m.lower() for m in models_in_data])

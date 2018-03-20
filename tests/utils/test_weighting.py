@@ -39,7 +39,8 @@ def test_unweighted_median(random_array):
 
         median = random_array.median(dim=dim)
 
-        assert (weighted == median).all()
+        if not (weighted == median).all():
+            raise ValueError()
 
 
 def test_first_value(random_array):
@@ -53,7 +54,8 @@ def test_first_value(random_array):
 
         first = random_array.isel(**{dim: 0})
 
-        assert (weighted == first).all()
+        if not (weighted == first).all():
+            raise ValueError()
 
 
 def test_manual_weighting(increasing_array):
@@ -67,7 +69,8 @@ def test_manual_weighting(increasing_array):
 
         manual = increasing_array.isel(**{dim: [0, 1, 1, 4]}).median(dim=dim)
 
-        assert (weighted == manual).all()
+        if not (weighted == manual).all():
+            raise ValueError()
 
 
 def test_unsorted_weights_index(increasing_array):
@@ -88,4 +91,5 @@ def test_unsorted_weights_index(increasing_array):
             dim=pd.Index([0.125, 0.5], name='quantile'),
             **{dim: [1, 3]})
 
-        assert (weighted == manual).all()
+        if not (weighted == manual).all():
+            raise ValueError()

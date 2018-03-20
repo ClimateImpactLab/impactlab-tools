@@ -7,7 +7,6 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 requirements_install = [
-    'datafs>=0.6.9'
     ]
 
 requirements_test = [
@@ -28,8 +27,7 @@ requirements_conda = [
     'numpy>=1.7',
     'pandas>=0.15',
     'netCDF4>=1.1',
-    'xarray>=0.8',
-    'metacsv>=0.0.16'
+    'xarray>=0.8'
 ]
 
 extras = {
@@ -40,14 +38,18 @@ extras = {
 
 setup(
     name='impactlab-tools',
-    version='0.2.0',
+    version='0.3.1',
     description="Python tools for Climate Impact Lab developers",
     long_description=readme,
     author="Climate Impact Lab",
     url='https://github.com/ClimateImpactLab/impactlab-tools',
-    packages=find_packages(exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
+    packages=find_packages(
+        exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
     package_dir={'impactlab_tools':
                  'impactlab_tools'},
+    package_data={
+        'impactlab-tools': ['impactlab_tools/assets/*'],
+    },
     include_package_data=True,
     install_requires=requirements_install,
     license="MIT license",
@@ -59,7 +61,10 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7'
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6"
     ],
     test_suite='tests',
     setup_requires=['pytest-runner'],
