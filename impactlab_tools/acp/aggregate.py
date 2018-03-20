@@ -1,6 +1,10 @@
 
-import datafs
-from impactlab_tools.utils.cache import DataCache
+from __future__ import absolute_import
+
+import xarray as xr
+import os
+
+import impactlab_tools.assets
 
 
 def population_weighted_mean(
@@ -8,7 +12,6 @@ def population_weighted_mean(
         level='state',
         dim='fips',
         year=2012,
-        api=None,
         pop=None):
     '''
     Find the population-weighted mean of a county-level xarray DataArray
@@ -31,10 +34,6 @@ def population_weighted_mean(
         population year (or column in the ``pop`` dataset) to use for the
         weights. If not provided, 2012 population is used.
 
-    api : DataAPI (optional)
-        :py:class:`datafs.DataAPI` object to use. If not provided, creates a
-        new ``DataAPI`` object
-
     pop : array (optional)
         :py:class:`~xarray.DataArray` to use for weights. If not provided,
         US Census Bureau 2014 vintage CO-EST2014-alldata.csv estimates from
@@ -47,11 +46,13 @@ def population_weighted_mean(
 
     '''
 
-    if pop is None and api is None:
-        api = datafs.get_api()
-
     if pop is None:
-        pop = _prep_pop_data(api)
+        with xr.open_dataset(
+            os.path.join(
+                os.path.dirname(impactlab_tools.assets.__file__),
+                'ACP_county_census_pop.nc')) as pop:
+
+            return pop.load()
 
         if dim != 'fips':
             pop = pop.rename({'fips': dim})
@@ -59,12 +60,3 @@ def population_weighted_mean(
     return (
         ((ds * pop[str(year)]).groupby(level).sum(dim=dim)) /
         ((pop[str(year)]).groupby(level).sum(dim=dim)))
-
-
-def _prep_pop_data(api):
-
-    pop_arch = (
-        'ACP/integration/socioeconomics/population/' +
-        'census/county_census_pop.nc')
-
-    return DataCache.retrieve(pop_arch, api=api)

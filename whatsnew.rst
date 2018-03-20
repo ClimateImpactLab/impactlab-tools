@@ -3,8 +3,20 @@ What's New
 
 These are new features and improvements of note in each release.
 
-v0.0.7 (Current version)
-------------------------
+v0.3.0 (March 17, 2018)
+-----------------------
+
+ - drop DataFS dependency and move all data dependencies to ``impactlab_tools/assets`` (:issue:`147`)
+ - add python 3+ support (:issue:`82`)
+
+v0.2.0 (December 12, 2017)
+--------------------------
+
+ - add paralog
+ - add mapping utilities in :py:mod:`impactlab_tools.utils.visualize`
+
+v0.1.0 (September 8, 2017)
+--------------------------
 
   - fix bug causing docs to fail when importing conda packages (:issue:`67`)
   - add missing documentation for utils.binning module (finalizes :issue:`59`)
