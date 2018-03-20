@@ -74,24 +74,23 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
 
     .. code-block:: python
 
-        >>> da = (xr.DataArray(
+        >>> da = xr.DataArray(
         ...     np.arange(16).reshape(4,4),
         ...     dims=('a', 'b'),
         ...     coords={'a': list('abcd'), 'b': list('wxyz')})
-        ...     .transpose('a', 'b'))
         ...
-        >>> da # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+        >>> da # doctest: +SKIP
         <xarray.DataArray (a: 4, b: 4)>
         array([[  0,  1,  2,  3],
                [  4,  5,  6,  7],
                [  8,  9, 10, 11],
-              ...12, 13, 14, 15]])
+               [ 12, 13, 14, 15]])
         Coordinates:
-          * a        (a) ... 'a' 'b' 'c' 'd'
-          * b        (b) ... 'w' 'x' 'y' 'z'
+          * a        (a) <U1 'a' 'b' 'c' 'd'
+          * b        (b) <U1 'w' 'x' 'y' 'z'
 
         >>> binned_statistic_1d(
-        ...     da, 'b', [0, 2, 5, 20]).transpose('a', 'groups')
+        ...     da, 'b', [0, 2, 5, 20])
         ...     # doctest: +SKIP
         <xarray.DataArray (a: 4, goh realroups: 3)>
         array([[ 2., 2., 0.],
@@ -99,13 +98,10 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
                [ 0., 0., 4.],
                [ 0., 0., 4.]])
         Coordinates:
-          * a        (a) ... 'a' 'b' 'c' 'd'
+          * a        (a) <U1 'a' 'b' 'c' 'd'
           * groups   (groups) object '(0, 2]' '(2, 5]' '(5, 20]'
 
-        >>> (
-        ...     binned_statistic_1d(da, 'a', statistic='sum')
-        ...     .transpose('groups', 'b')
-        ...     ) # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+        >>> binned_statistic_1d(da, 'a', statistic='sum') # doctest: +SKIP
         <xarray.DataArray (groups: 10, b: 4)>
         array([[  0.,  1.,  2.,  3.],
                [  0.,  0.,  0.,  0.],
@@ -116,10 +112,10 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
                [  8.,  9., 10., 11.],
                [  0.,  0.,  0.,  0.],
                [  0.,  0.,  0.,  0.],
-              ...12., 13., 14., 15.]])
+               [ 12., 13., 14., 15.]])
         Coordinates:
           * groups   (groups) object '(0.0, 1.5]' '(1.5, 3.0]' '(3.0, 4.5]' ...
-          * b        (b) ... 'w' 'x' 'y' 'z'
+          * b        (b) <U1 'w' 'x' 'y' 'z'
     '''
 
     # apply binned_statistic along dim
