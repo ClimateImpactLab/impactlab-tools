@@ -5,7 +5,7 @@ pandas==0.22.0
 h5py==2.7.1
 numba==0.37.0
 blaze==0.10.1
-scipy==1.0.0
+scipy==1.0.1
 bottleneck==1.2.1
 dask==0.17.1
 basemap==1.0.7
