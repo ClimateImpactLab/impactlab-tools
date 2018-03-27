@@ -1,6 +1,31 @@
+
+from __future__ import absolute_import
+
 import numpy as np
 import pandas as pd
 import xarray as xr
+
+import toolz
+import os
+
+import impactlab_tools.assets
+
+
+# file readers for default weights files in assets directory
+
+@toolz.memoize
+def _get_weights(project='acp', rcp='rcp85'):
+
+    da = (
+        pd.read_csv(
+            os.path.join(
+                os.path.dirname(impactlab_tools.assets.__file__),
+                'weights_{}.csv'.format(project)),
+            index_col=[0, 1])['weight']
+        .xs(rcp, level='rcp')
+        .to_xarray())
+
+    return da
 
 
 # Computation helpers
@@ -223,8 +248,8 @@ def weighted_quantile_1d(
 
     sample_weight = np.array(sample_weight)
 
-    msg = 'quantiles should be in [0, 1]'
-    assert np.all(quantiles >= 0) and np.all(quantiles <= 1), msg
+    if not np.all(quantiles >= 0) and np.all(quantiles <= 1):
+        raise ValueError('quantiles should be in [0, 1]')
 
     if not values_sorted:
 

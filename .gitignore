@@ -69,3 +69,5 @@ target/
 #.IPython
 *.ipynb
 *.ipynb_checkpoints
+
+.pytest_cache

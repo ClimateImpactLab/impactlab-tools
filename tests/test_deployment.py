@@ -1,18 +1,25 @@
 
+from __future__ import absolute_import
+
 import pytest
 
 
 def test_top_level_imports():
     import impactlab_tools
 
-    assert isinstance(impactlab_tools, type(pytest))
+    if not isinstance(impactlab_tools, type(pytest)):
+        raise TypeError
 
 
 def test_acp_imports():
     from impactlab_tools.acp import dist, aggregate
-    from impactlab_tools.utils import cache, weighting
+    from impactlab_tools.utils import weighting
 
-    assert isinstance(dist, type(pytest))
-    assert isinstance(aggregate, type(pytest))
-    assert isinstance(cache, type(pytest))
-    assert isinstance(weighting, type(pytest))
+    if not isinstance(dist, type(pytest)):
+        raise TypeError
+
+    if not isinstance(aggregate, type(pytest)):
+        raise TypeError
+
+    if not isinstance(weighting, type(pytest)):
+        raise TypeError

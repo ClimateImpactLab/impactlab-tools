@@ -12,14 +12,6 @@ impactlab_tools.utils.binning module
     :undoc-members:
     :show-inheritance:
 
-impactlab_tools.utils.cache module
-----------------------------------
-
-.. automodule:: impactlab_tools.utils.cache
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 impactlab_tools.utils.files module
 ----------------------------------
 
