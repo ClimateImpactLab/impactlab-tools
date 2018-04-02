@@ -3,7 +3,7 @@ sphinx-rtd-theme==0.2.5b2
 pip==9.0.3
 wheel==0.30.0
 flake8==3.5.0
-tox==2.9.1
+tox==3.0.0
 pytest==3.4.2
 coverage==4.5.1
 pytest-cov==2.5.1
