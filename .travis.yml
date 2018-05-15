@@ -54,7 +54,7 @@ deploy:
   password:
     secure: JqqurmDY/C/MWtInkFj9p/7PWc6WDQ3rCT0Nv+jZIjvhrM9KZR1iaYrmzfPC+x5HkLkJ8Hu1gFCACjwo51zj52kXCq2hTm9KR8+YOIoSqO0uKh/ZgiAFV0VuEhdmhwMIfPUDAK1iPQZkT3F0j6y1ZJ6pXxxUciYEdPBBelsumSS93k2fZqOhKKDyfafMTcPxw43W7VYUflkuqoCW4Zuy+qoXca9DWXRLWsXOraMb8ZtlcK6EPtORdMt9i+3cxggq86eQmYX3VxHvPZ51UXVkKuGgZHi/KWO14EgF5LvL4hs6QldBKmLFIsMGYhgOBSNAHhfWRyLUSenH6RqtfdVYmtGUHetGZxlcwdxhes31U0itYWZrMUP05nFiYjY5VTjeZcVIyZfr5qc8ZfD1cz/tVGTbcKq05ayDbIyd+RjdXbjR49G1Vx4Zm4IR+8oL+DV8rClxAOO98RZ9u1H3GuUHofY2QJIzbWrw7Agbw+iVTIlQC3CQQ/PAHyLWoj4FLwctQWvMbTBmyCUY+EkY+kA1G7eIkgSCfXuQ+sOdfljPEtiS6mN4eJMhZzE9u7UQz2F6XS+WXEOWTnLCLyBVAsmr1RfqHNk5K3q/1lAFr0WRoj4FIusBX71cWfIhlqHV+BPwue3qqobvDRy/qlSfMNWG+iMBrqv4w2hUuXxNCClkCXI=
   on:
-    branch: master
+    tags: true
     distributions: sdist bdist_wheel
     repo: ClimateImpactLab/impactlab-tools
 
