@@ -1,4 +1,4 @@
-numpy==1.13.3
+numpy==1.14.5
 netcdf4==1.4.0
 xarray==0.10.4
 pandas==0.23.0
