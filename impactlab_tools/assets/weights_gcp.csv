@@ -2,9 +2,9 @@ rcp,model,weight
 rcp45,surrogate_mri-cgcm3_01,0.01
 rcp45,surrogate_gfdl-esm2g_01,0.01
 rcp45,surrogate_mri-cgcm3_06,0.04
-rcp45,surrogate_gfdl-esm2g_06,0.04
+rcp45,surrogate_gfdl-esm2g_06,0.00
 rcp45,surrogate_mri-cgcm3_11,0.01
-rcp45,surrogate_gfdl-esm2g_11,0.0
+rcp45,surrogate_gfdl-esm2g_11,0.01
 rcp45,gfdl-esm2g,0.01
 rcp45,gfdl-esm2m,0.06
 rcp45,inmcm4,0.06
