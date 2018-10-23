@@ -4,7 +4,7 @@ pip==9.0.3
 wheel==0.31.1
 flake8==3.5.0
 tox==3.0.0
-pytest==3.5.1
+pytest==3.9.2
 coverage==4.5.1
 pytest-cov==2.5.1
 pytest-runner==4.2
