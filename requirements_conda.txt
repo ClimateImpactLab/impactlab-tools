@@ -1,6 +1,6 @@
 numpy==1.13.3
 netcdf4==1.4.2
-xarray==0.10.4
+xarray==0.11.3
 pandas==0.24.0
 scipy==1.2.0
 bottleneck==1.2.1
