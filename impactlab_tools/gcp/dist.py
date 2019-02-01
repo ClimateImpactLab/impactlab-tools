@@ -8,10 +8,11 @@ from impactlab_tools.utils.weighting import weighted_quantile_xr, _get_weights
 
 def gcp_quantiles(
         data,
-        rcp,
+        rcp=None,
         quantiles=[0.05, 0.17, 0.5, 0.83, 0.95],
         values_sorted=False,
-        dim='model'):
+        dim='model',
+        sample_weight=None):
     """
     Compute quantiles of an xarray distribution using GCP weights
 
@@ -31,8 +32,9 @@ def gcp_quantiles(
         passed, ``gcp_quantiles`` computes the weighted quantile for each
         variable in the ``Dataset`` that is indexed by ``dim``.
 
-    rcp : str
-        RCP weights/models to use ('rcp45', 'rcp85')
+    rcp : str, optional
+        RCP weights/models to use ('rcp45', 'rcp85'). Required if no
+        ``sample_weight`` provided.
 
     quantiles : array-like
         quantiles of distribution to return. quantiles should be in [0, 1].
@@ -44,6 +46,11 @@ def gcp_quantiles(
         dimension along which to retrieve quantiles. The indices of this
         dimension should be valid (case insensitive) GCP climate models.
         Default: `'model'`.
+     
+     sample_weight : DataArray, optional
+        weights to use when producing the weighted quantiles. Required
+        if no RCP provided. If not provided, uses the defualt weights
+        for the RCP provided, based on Rasmussen et al. (2015).
 
     Returns
     -------
@@ -70,8 +77,9 @@ def gcp_quantiles(
     """
 
     # prep weight
-    sample_weight = _get_weights(project='gcp', rcp=rcp)
-    sample_weight = sample_weight.rename({'model': dim})
+    if sample_weight is None:
+        sample_weight = _get_weights(project='gcp', rcp=rcp)
+        sample_weight = sample_weight.rename({'model': dim})
 
     # prepare arrays of models to align along `dim` (case insensitive)
     models_in_data = data.coords[dim].values
