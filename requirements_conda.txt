@@ -1,5 +1,5 @@
 numpy==1.13.3
-netcdf4==1.4.2
+netcdf4==1.4.3.1
 xarray==0.11.3
 pandas==0.24.1
 scipy==1.2.0
