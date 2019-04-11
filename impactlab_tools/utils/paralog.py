@@ -101,14 +101,16 @@ class StatusManager(object):
         """Release the claim on this directory."""
         try:
             os.remove(StatusManager.claiming_filepath(dirpath, self.jobname))
-        except:
+        except Exception as ex:
             print("Warning: Could not release directory.")
+            print(ex)
 
         try:
             with open(StatusManager.globalstatus_filepath(dirpath), 'a') as fp:
                 fp.write("%s %s: %s\n" % (time.asctime(), self.jobtitle, status))
-        except:
+        except Exception as ex:
             print("Warning: Could write release status %s" % status)
+            print(ex)
 
     def is_claimed(self, dirname):
         """Check if a directory has claims from any of our jobs."""
