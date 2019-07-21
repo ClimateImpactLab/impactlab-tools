@@ -5,6 +5,6 @@ pandas==0.24.1
 scipy==1.2.0
 bottleneck==1.2.1
 geopandas==0.4.0
-gdal==2.3.2
+gdal==3.0.1
 dask==0.17.1
 matplotlib==2.2.2
