@@ -1,7 +1,7 @@
 numpy
 netcdf4
 xarray
-pandas
+pandas==0.25.0
 scipy
 bottleneck
 geopandas
