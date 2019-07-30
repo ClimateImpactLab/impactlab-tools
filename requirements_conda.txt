@@ -4,7 +4,7 @@ xarray
 pandas
 scipy
 bottleneck
-geopandas
+geopandas==0.5.1
 gdal
 dask
 matplotlib
