@@ -48,7 +48,7 @@ setup(
     package_dir={'impactlab_tools':
                  'impactlab_tools'},
     package_data={
-        'impactlab-tools': ['impactlab_tools/assets/*'],
+        'impactlab-tools': ['assets/*'],
     },
     include_package_data=True,
     install_requires=requirements_install,
