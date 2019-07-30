@@ -3,7 +3,7 @@ netcdf4
 xarray
 pandas
 scipy
-bottleneck
+bottleneck==1.2.1
 geopandas
 gdal
 dask
