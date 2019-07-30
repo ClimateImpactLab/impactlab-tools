@@ -1,6 +1,6 @@
 numpy
 netcdf4
-xarray
+xarray==0.12.3
 pandas
 scipy
 bottleneck
