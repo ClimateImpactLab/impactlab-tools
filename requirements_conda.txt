@@ -6,5 +6,5 @@ scipy
 bottleneck
 geopandas
 gdal
-dask
+dask==2.2.0
 matplotlib
