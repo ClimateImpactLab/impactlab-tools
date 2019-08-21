@@ -3,6 +3,11 @@ What's New
 
 These are new features and improvements of note in each release.
 
+v0.3.1 (March 19, 2018)
+-----------------------
+
+ - Stability and performance improvements.
+
 v0.3.0 (March 17, 2018)
 -----------------------
 
