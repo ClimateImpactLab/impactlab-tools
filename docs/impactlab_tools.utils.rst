@@ -20,6 +20,16 @@ impactlab_tools.utils.files module
     :undoc-members:
     :show-inheritance:
 
+
+impactlab_tools.utils.configdict module
+---------------------------------------
+
+.. automodule:: impactlab_tools.utils.configdict
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 impactlab_tools.utils.versions module
 -------------------------------------
 

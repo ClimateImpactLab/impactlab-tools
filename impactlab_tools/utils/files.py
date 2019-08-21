@@ -8,6 +8,9 @@ import sys
 import os
 import yaml
 
+from impactlab_tools.utils.configdict import gather_configtree
+
+
 default_server_config_path = "../server.yml"
 server_config = None
 
@@ -55,7 +58,7 @@ def get_file_config(filepath):
     """Load a configuration file from a given path."""
 
     with open(filepath, 'r') as fp:
-        config = yaml.load(fp)
+        config = gather_configtree(yaml.load(fp))
         return config
 
 def get_argv_config(index=1):
@@ -67,7 +70,7 @@ def get_argv_config(index=1):
     """
 
     with open(sys.argv[index], 'r') as fp:
-        config = yaml.load(fp)
+        config = gather_configtree(yaml.load(fp))
         return config
 
 def get_allargv_config():
@@ -102,7 +105,7 @@ def get_allargv_config():
 
         config[arg] = True
 
-    return config
+    return gather_configtree(config)
 
 if __name__ == '__main__':
     print(configpath('testing'))

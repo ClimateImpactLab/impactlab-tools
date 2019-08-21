@@ -21,8 +21,7 @@ Job configurations
 The configuration options for individual jobs are usually specified on
 the command-line, and accessed through the
 :code:`files.get_allargv_config()` function.  The
-:code:`files.get_allargv_config()` function builds a single configuration
-dictionary from arguments according to the following rules:
+:code:`files.get_allargv_config()` function returns a :py:class:`impactlab_tools.utils.configdict.ConfigDict` object using arguments from the following rules:
 
  - :code:`FILE.yml`: a full configuration YaML file, merged into the result dictionary
  - :code:`--config=FILE.yml`: a full configuration YaML file, as above
