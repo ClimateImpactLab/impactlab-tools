@@ -25,8 +25,18 @@ def gather_configtree(d):
 
         >>> nest = {'a': 1, 'b': {'a': 2}, 'c': 3, 'd-4': 4, 'e_5': 5, 'F': 6}
         >>> tree = gather_configtree(nest)
+        >>> tree['b']['a']
+        2
+
+    Returns the value for "a" in the *nested* dictionary "b". However, if we
+    request a key that is not available in this nested "b" dictionary, it
+    will search through all parents.
+
         >>> tree['b']['d-4']
         4
+
+    A ``KeyError`` is only thrown if the search has been exhausted with no
+    matching keys found.
     """
     out = ConfigDict(d)
     for k, v in out.data.items():
