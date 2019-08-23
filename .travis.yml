@@ -28,6 +28,7 @@ install:
       hash -r;
       conda config --set always_yes yes --set changeps1 no;
       conda config --add channels conda-forge;
+      conda config --set channel_priority strict;
       conda update -q conda;
       conda info -a;
       conda create -q -n impactlab_tools python=$TRAVIS_PYTHON_VERSION;
@@ -47,7 +48,7 @@ script:
     else
       tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypy\(py\)\?\([0-9\.\-]\+\)\?/pypy/');
     fi
-  
+
 deploy:
   provider: pypi
   user: delgadom
