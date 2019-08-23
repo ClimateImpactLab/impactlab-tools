@@ -55,12 +55,16 @@ def test_configdict_throws_keyerror(simple_nested_tree):
 
 def test_configdict_merge(simple_nested_tree):
     conf1 = ConfigDict(simple_nested_tree)
-    conf2 = ConfigDict(simple_nested_tree)
-    conf2['a'] = 9
+    conf2 = ConfigDict({'foo': 0})
+
+    internal_goal = simple_nested_tree.copy()
+    internal_goal['foo'] = 0
 
     conf_merge = conf1.merge(conf2)
 
-    assert conf_merge.data == conf2.data
+    assert conf_merge['foo'] == 0
+    for k, v in simple_nested_tree.items():
+        assert conf_merge[k] == v
     assert conf_merge.parent == conf1.parent
 
 
