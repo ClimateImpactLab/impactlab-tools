@@ -100,7 +100,7 @@ def test_configdict_key_access_stack_nested(simple_nested_tree):
 
     assert list(nested.key_access_stack.keys()) == ['a']
 
-    top_keys = list(nested.parent.key_access_stack.keys())
+    top_keys = list(conf.key_access_stack.keys())
     top_keys.sort()
     assert top_keys == ['b', 'f']
 
