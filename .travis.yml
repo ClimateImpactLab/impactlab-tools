@@ -1,9 +1,10 @@
 language: python
+dist: xenial
 
 python:
   - 2.7
-  - 3.5
   - 3.6
+  - 3.7
   - pypy-5.4.1
 
 env:
