@@ -105,29 +105,78 @@ def test_configdict_key_access_stack_nested(simple_nested_tree):
     assert top_keys == ['b', 'f']
 
 
-def test_configdict_used_all_keys_falseparent(simple_nested_tree):
-    conf = gather_configtree(simple_nested_tree)
-    nested = conf['b']
+def test_configdict_accessed_all_keys_local(simple_nested_tree):
+    root_conf = gather_configtree(simple_nested_tree)
+    child_conf = root_conf['b']
 
-    nested['a']
-    nested['f']
+    root_conf['a']
+    root_conf['c']
+    root_conf['d-4']
+    root_conf['e-5']
 
-    assert nested.accessed_all_keys() is False
+    assert root_conf.accessed_all_keys(search='local') is False
+
+    root_conf['f']
+
+    assert root_conf.accessed_all_keys(search='local') is True
+
+    assert child_conf.accessed_all_keys(search='local') is False
 
 
-def test_configdict_accessed_all_keys(simple_nested_tree):
-    conf = gather_configtree(simple_nested_tree)
-    nested = conf['b']
+def test_configdict_accessed_all_keys_local(simple_nested_tree):
+    kwargs = {'search': 'local'}
+    root_conf = gather_configtree(simple_nested_tree)
+    child_conf = root_conf['b']
 
-    conf['a']
-    conf['c']
-    conf['d-4']
-    conf['e-5']
-    conf['f']
+    root_conf['a']
+    root_conf['c']
+    root_conf['d-4']
+    root_conf['e-5']
 
-    assert conf.accessed_all_keys() is True
-    assert nested.accessed_all_keys() is False
+    assert root_conf.accessed_all_keys(**kwargs) is False
 
-    nested['a']
+    root_conf['f']
 
-    assert nested.accessed_all_keys() is True
+    assert root_conf.accessed_all_keys(**kwargs) is True
+
+    assert child_conf.accessed_all_keys(**kwargs) is False
+
+
+def test_configdict_accessed_all_keys_children(simple_nested_tree):
+    kwargs = {'search': 'children'}
+
+    root_conf = gather_configtree(simple_nested_tree)
+
+    child_conf = root_conf['b']
+    root_conf['a']
+    root_conf['c']
+    root_conf['d-4']
+    root_conf['e-5']
+    root_conf['f']
+
+    assert root_conf.accessed_all_keys(**kwargs) is False
+
+    child_conf['a']
+
+    assert root_conf.accessed_all_keys(**kwargs) is True
+    assert child_conf.accessed_all_keys(**kwargs) is True
+
+
+def test_configdict_accessed_all_keys_parents(simple_nested_tree):
+    kwargs = {'search': 'parents'}
+
+    root_conf = gather_configtree(simple_nested_tree)
+
+    child_conf = root_conf['b']
+    root_conf['a']
+    root_conf['c']
+    root_conf['d-4']
+    root_conf['e-5']
+    child_conf['a']
+
+    assert child_conf.accessed_all_keys(**kwargs) is False
+
+    root_conf['f']
+
+    assert child_conf.accessed_all_keys(**kwargs) is True
+    assert root_conf.accessed_all_keys(**kwargs) is True

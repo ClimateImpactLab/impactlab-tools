@@ -133,21 +133,100 @@ class ConfigDict(collections.UserDict):
         if isinstance(key, str):
             return key.lower().replace('_', '-')
 
-    def accessed_all_keys(self):
+    def accessed_all_keys(self, search='local'):
         """Were all the keys used in the config tree?
+
+        Parameters
+        ----------
+        search : str, optional
+            What should the search cover? Options are:
+
+            local
+                Only check whether keys were used locally (in `self`).
+
+            parents
+                Recursively check keys in parents, moving up the tree, after
+                checking local keys.
+
+            children
+                Recursively check keys in children, moving down the tree, after
+                checking local keys.
 
         Returns
         -------
         bool
+
+        Examples
+        --------
+        .. code-block:: python
+
+            >>> d = {'a': 1, 'b': {'a': 2}, 'c': 3, 'd-4': 4, 'e_5': 5, 'F': 6}
+            >>> root_config = gather_configtree(d)
+            >>> child_config = root_config['b']
+            >>> child_config['a']
+            2
+
+            We can check whether all the keys in `child_config` have been
+            accessed.
+
+            >>> child_config.accessed_all_keys()
+            True
+
+            Same but also checking that all keys up the tree in parents have
+            been used.
+
+            >>> child_config.accessed_all_keys('parents')
+            False
+
+            Several keys in root_config were not accessed, so False is
+            returned.
+
+            Can also check key use locally and down the tree in nested, child
+            ConfigDict instances.
+
+            >>> root_config.accessed_all_keys('children')
+            False
+
+            ...which is still False in this case -- all keys in nested
+            child_config have been used, but not all of the local keys in
+            root_config have been used.
+
         """
+        search = str(search)
+        search_options = ('local', 'parents', 'children')
+        if search not in search_options:
+            raise ValueError('`search` must be in {}'.format(search_options))
+
         local_access = set(self.key_access_stack.keys())
         local_keys = set(self.data.keys())
         all_used = local_access == local_keys
 
-        if self.parent is not None:
-            all_used = all_used and self.parent.accessed_all_keys()
+        # Using a "fail fast" strategy...
 
-        return all_used
+        if all_used is False:
+            return False
+
+        if search == 'parents':
+            # Recursively check parents keys, if any haven't been used,
+            # immediately return False.
+            if self.parent is not None:
+                parent_used = self.parent.accessed_all_keys(search=search)
+                if parent_used is False:
+                    return False
+        elif search == 'children':
+            # Recursively check children keys, if any haven't been used,
+            # immediately return False.
+            for k, v in self.data.items():
+                # Assuming its faster to ask for forgiveness than to check
+                # with `isinstance()` or `hasattr()q...
+                try:
+                    child_used = v.accessed_all_keys(search=search)
+                    if child_used is False:
+                        return False
+                except AttributeError:
+                    continue
+
+        return True
 
     def merge(self, x, xparent=False):
         """Merge, returning new copy
