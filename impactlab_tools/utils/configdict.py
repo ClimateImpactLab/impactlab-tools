@@ -134,7 +134,7 @@ class ConfigDict(collections.UserDict):
             return key.lower().replace('_', '-')
 
     def accessed_all_keys(self):
-        """Where all the keys used in the config tree?
+        """Were all the keys used in the config tree?
 
         Returns
         -------
