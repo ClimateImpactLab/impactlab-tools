@@ -1,8 +1,12 @@
 """Class for representing tool configuration files
 """
-
 import collections
 import inspect
+# For python2 support:
+try:
+    from collections import UserDict
+except ImportError:
+    from UserDict import UserDict
 
 
 def gather_configtree(d):
@@ -47,7 +51,7 @@ def gather_configtree(d):
     return out
 
 
-class ConfigDict(collections.UserDict):
+class ConfigDict(UserDict):
     """Chain-able dictionary to hold projection configurations.
 
     A ConfigDict is a dictionary-like interface to a chainmap/linked list.
