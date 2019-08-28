@@ -51,7 +51,7 @@ def gather_configtree(d):
     return out
 
 
-class ConfigDict(UserDict):
+class ConfigDict(UserDict, object):
     """Chain-able dictionary to hold projection configurations.
 
     A ConfigDict is a dictionary-like interface to a chainmap/linked list.
@@ -100,7 +100,7 @@ class ConfigDict(UserDict):
         dict_keys(['b', 'f', 'e-5'])
     """
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(ConfigDict, self).__init__(*args, **kwargs)
         self.parent = None
 
         for k, v in self.data.items():
@@ -113,7 +113,7 @@ class ConfigDict(UserDict):
 
     def __getitem__(self, key):
         key = self._normalize_key(key)
-        out = super().__getitem__(key)
+        out = super(ConfigDict, self).__getitem__(key)
 
         # We don't want to store in key_access_stack if __missing__() was used
         if key in self.data.keys():
@@ -128,7 +128,7 @@ class ConfigDict(UserDict):
     def __setitem__(self, key, value):
         # Note we're not changing `value.parents` if `value` is ConfigDict.
         key = self._normalize_key(key)
-        super().__setitem__(key, value)
+        super(ConfigDict, self).__setitem__(key, value)
 
     @staticmethod
     def _normalize_key(key):
