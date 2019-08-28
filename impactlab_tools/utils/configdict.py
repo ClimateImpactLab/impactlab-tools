@@ -1,12 +1,13 @@
 """Class for representing tool configuration files
 """
-import collections
 import inspect
 # For python2 support:
 try:
     from collections import UserDict
+    import collections.abc as collections_abc
 except ImportError:
     from UserDict import UserDict
+    import collections as collections_abc
 
 
 def gather_configtree(d):
@@ -45,7 +46,7 @@ def gather_configtree(d):
     out = ConfigDict(d)
     for k, v in out.data.items():
         # Replace nested maps with new ConfigDicts
-        if isinstance(v, collections.abc.MutableMapping):
+        if isinstance(v, collections_abc.MutableMapping):
             out.data[k] = gather_configtree(v)
             out.data[k].parent = out
     return out
