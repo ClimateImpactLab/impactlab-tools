@@ -97,7 +97,7 @@ class ConfigDict(UserDict, object):
 
         Keys that have been accessed.
 
-        >>> cd.key_access_stack.keys()
+        >>> cd.key_access_stack.keys() # doctest: +SKIP
         dict_keys(['b', 'f', 'e-5'])
     """
     def __init__(self, *args, **kwargs):
