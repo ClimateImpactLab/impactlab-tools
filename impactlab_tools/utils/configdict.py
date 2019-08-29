@@ -40,7 +40,7 @@ def gather_configtree(d):
         >>> tree['b']['d-4']
         4
 
-    A ``KeyError`` is only thrown if the search has been exhausted with no
+    A `KeyError` is only thrown if the search has been exhausted with no
     matching keys found.
     """
     out = ConfigDict(d)
@@ -64,10 +64,10 @@ class ConfigDict(UserDict, object):
     Attributes
     ----------
     parent : ConfigDict or None
-        Parent ConfigDict object to query for keys if not in `self.data`.
+        Parent ConfigDict object to query for keys if not in ``self.data``.
     key_access_stack : dict
         Dictionary with values giving the :py:func:`inspect.stack()` from the
-        most recent time a key was retrieved (via `self.__getitem__()`).
+        most recent time a key was retrieved (via ``self.__getitem__()``).
     data : dict
         The 'local' dictionary, not in parents.
 
@@ -143,17 +143,17 @@ class ConfigDict(UserDict, object):
 
         Parameters
         ----------
-        search : str, optional
+        search : {'local', 'parents', 'children'}
             What should the search cover? Options are:
 
-            local
+            ``"local"``
                 Only check whether keys were used locally (in `self`).
 
-            parents
+            ``"parents"``
                 Recursively check keys in parents, moving up the tree, after
                 checking local keys.
 
-            children
+            ``"children"``
                 Recursively check keys in children, moving down the tree, after
                 checking local keys.
 
@@ -240,13 +240,13 @@ class ConfigDict(UserDict, object):
         ----------
         x : ConfigDict
         xparent : bool, optional
-            Do attach `x.parent` to `out.parent`? If False, attaches
-            `self.parent`.
+            Attach ``x.parent`` to ``out.parent``? If False, attaches
+            ``self.parent``.
 
         Return
         ------
         out : ConfigDict
-            Merged ConfigDict, using copied values from `self`.
+            Merged ConfigDict, using copied values from ``self``.
         """
         out = self.copy()
         out.update(x)
