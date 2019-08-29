@@ -3,6 +3,11 @@ What's New
 
 These are new features and improvements of note in each release.
 
+v0.4.0
+------
+
+ - fix bug causing assets to be missing from installed package (:issue:`187`)
+
 v0.3.0 (March 17, 2018)
 -----------------------
 

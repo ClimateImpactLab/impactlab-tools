@@ -47,9 +47,7 @@ setup(
         exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
     package_dir={'impactlab_tools':
                  'impactlab_tools'},
-    package_data={
-        'impactlab-tools': ['assets/*'],
-    },
+    package_data={'impactlab-tools': ['assets/*']},
     include_package_data=True,
     install_requires=requirements_install,
     license="MIT license",
