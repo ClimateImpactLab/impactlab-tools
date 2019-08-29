@@ -6,6 +6,8 @@ These are new features and improvements of note in each release.
 v0.4.0
 ------
 
+ - fix bug causing assets to be missing from installed package (:issue:`187`)
+
  - configurations returned by :py:func:`impactlab_tools.utils.files.get_file_config`, :py:func:`impactlab_tools.utils.files.get_argv_config`, and :py:func:`impactlab_tools.utils.files.get_allargv_config` are now objects of a new :py:class:`impactlab_tools.utils.configdict.ConfigDict` class (:issue:`434`)
 
 v0.3.1 (March 19, 2018)
