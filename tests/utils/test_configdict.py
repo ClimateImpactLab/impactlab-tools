@@ -9,8 +9,8 @@ def simple_nested_tree():
 
 
 def test_configdict_climbs_tree(simple_nested_tree):
-    conf = ConfigDict(simple_nested_tree)
-    assert conf['c'] == 3
+    conf = gather_configtree(simple_nested_tree)
+    assert conf['b']['c'] == 3
 
 
 def test_configdict_prefer_child(simple_nested_tree):
