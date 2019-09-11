@@ -8,6 +8,7 @@ import sys
 import os
 import yaml
 
+
 default_server_config_path = "../server.yml"
 server_config = None
 
@@ -25,6 +26,7 @@ def sharedpath(subpath):
         use_config(get_file_config(default_server_config_path))
 
     return os.path.join(server_config['shareddir'], subpath)
+
 
 def configpath(path):
     """Return an configured absolute path.  If the path is absolute, it
@@ -51,12 +53,14 @@ def use_config(config):
 
     server_config = config
 
+
 def get_file_config(filepath):
     """Load a configuration file from a given path."""
 
     with open(filepath, 'r') as fp:
         config = yaml.load(fp)
         return config
+
 
 def get_argv_config(index=1):
     """
@@ -69,6 +73,7 @@ def get_argv_config(index=1):
     with open(sys.argv[index], 'r') as fp:
         config = yaml.load(fp)
         return config
+
 
 def get_allargv_config():
     """
@@ -103,6 +108,7 @@ def get_allargv_config():
         config[arg] = True
 
     return config
+
 
 if __name__ == '__main__':
     print(configpath('testing'))

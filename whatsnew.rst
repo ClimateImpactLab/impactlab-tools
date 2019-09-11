@@ -8,6 +8,13 @@ v0.4.0
 
  - fix bug causing assets to be missing from installed package (:issue:`187`)
 
+ - Add new :py:class:`impactlab_tools.utils.configdict.ConfigDict` class and convenience function :py:func:`impactlab_tools.utils.configdict.gather_configtree` (:issue:`434`)
+
+v0.3.1 (March 19, 2018)
+-----------------------
+
+ - "stability and performance improvements"
+
 v0.3.0 (March 17, 2018)
 -----------------------
 
