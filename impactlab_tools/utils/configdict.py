@@ -238,10 +238,10 @@ class ConfigDict(UserDict, object):
 
         Parameters
         ----------
-        x : ConfigDict
+        x : ConfigDict or dict
         xparent : bool, optional
             Attach ``x.parent`` to ``out.parent``? If False, attaches
-            ``self.parent``.
+            ``self.parent``. Only works if `x` is :py:class:`ConfigDict`.
 
         Return
         ------
