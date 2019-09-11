@@ -12,6 +12,8 @@ v0.4.0
 
  - resolve warning message from upstream ``pyyaml`` deprecation (:issue:`447`)
 
+ - minor fixes to documentation
+
 v0.3.1 (March 19, 2018)
 -----------------------
 

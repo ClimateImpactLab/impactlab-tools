@@ -118,7 +118,7 @@ When making any changes to the impactlab-tools codebase, follow the following st
         $ python setup.py test
         $ flake8 impactlab-tools tests docs
 
-    You can run only the tests you wrote using pytest'sexpression matching
+    You can run only the tests you wrote using pytest's expression matching
     syntax, e.g.::
 
         $ pytest -k test_my_new_feature
