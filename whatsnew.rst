@@ -6,9 +6,11 @@ These are new features and improvements of note in each release.
 v0.4.0
 ------
 
+ - add new :py:class:`impactlab_tools.utils.configdict.ConfigDict` class and convenience function :py:func:`impactlab_tools.utils.configdict.gather_configtree` (:issue:`434`)
+
  - fix bug causing assets to be missing from installed package (:issue:`187`)
 
- - Add new :py:class:`impactlab_tools.utils.configdict.ConfigDict` class and convenience function :py:func:`impactlab_tools.utils.configdict.gather_configtree` (:issue:`434`)
+ - resolve warning message from upstream ``pyyaml`` deprecation (:issue:`447`)
 
 v0.3.1 (March 19, 2018)
 -----------------------
