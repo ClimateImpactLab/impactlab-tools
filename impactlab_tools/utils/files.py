@@ -58,7 +58,7 @@ def get_file_config(filepath):
     """Load a configuration file from a given path."""
 
     with open(filepath, 'r') as fp:
-        config = yaml.load(fp)
+        config = yaml.load(fp, Loader=yaml.FullLoader)
         return config
 
 
@@ -71,7 +71,7 @@ def get_argv_config(index=1):
     """
 
     with open(sys.argv[index], 'r') as fp:
-        config = yaml.load(fp)
+        config = yaml.load(fp, Loader=yaml.FullLoader)
         return config
 
 
