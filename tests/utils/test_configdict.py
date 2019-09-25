@@ -118,24 +118,6 @@ def test_configdict_key_access_stack_nested(simple_nested_tree):
 
 
 def test_configdict_accessed_all_keys_local(simple_nested_tree):
-    root_conf = gather_configtree(simple_nested_tree)
-    child_conf = root_conf['b']
-
-    root_conf['a']
-    root_conf['c']
-    root_conf['d-4']
-    root_conf['e-5']
-
-    assert root_conf.accessed_all_keys(search='local') is False
-
-    root_conf['f']
-
-    assert root_conf.accessed_all_keys(search='local') is True
-
-    assert child_conf.accessed_all_keys(search='local') is False
-
-
-def test_configdict_accessed_all_keys_local(simple_nested_tree):
     kwargs = {'search': 'local'}
     root_conf = gather_configtree(simple_nested_tree)
     child_conf = root_conf['b']
