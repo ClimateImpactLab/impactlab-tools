@@ -10,15 +10,19 @@ except ImportError:
     import collections as collections_abc
 
 
-def gather_configtree(d):
+def gather_configtree(d, parse_lists=False):
     """Chains nested-dicts into a connected tree of ConfigDict(s)
 
     Parameters
     ----------
-    d : dict
+    d : dict or MutableMapping
         Cast to :py:class:`ConfigDict`. Nested dicts within are also
         recursively cast and assigned parents, reflecting their nested
         structure.
+    parse_lists : bool, optional
+        If `d` or its children contain a list of dicts, do you want to convert
+        these listed dicts to ConfDicts and assign them parents. This is
+        slow. Note this only parses lists, strictly, not all Sequences.
 
     Returns
     -------
@@ -47,8 +51,17 @@ def gather_configtree(d):
     for k, v in out.data.items():
         # Replace nested maps with new ConfigDicts
         if isinstance(v, collections_abc.MutableMapping):
-            out.data[k] = gather_configtree(v)
+            out.data[k] = gather_configtree(v, parse_lists=parse_lists)
             out.data[k].parent = out
+
+        # If list has mappings, replace mappings with new ConfigDicts
+        if parse_lists and isinstance(v, list):
+            for idx, item in enumerate(v):
+                if isinstance(item, collections_abc.MutableMapping):
+                    cd = gather_configtree(item, parse_lists=parse_lists)
+                    cd.parent = out
+                    out.data[k][idx] = cd
+
     return out
 
 
@@ -138,7 +151,7 @@ class ConfigDict(UserDict, object):
         if isinstance(key, str):
             return key.lower().replace('_', '-')
 
-    def accessed_all_keys(self, search='local'):
+    def accessed_all_keys(self, search='local', parse_lists=False):
         """Were all the keys used in the config tree?
 
         Parameters
@@ -156,6 +169,11 @@ class ConfigDict(UserDict, object):
             ``"children"``
                 Recursively check keys in children, moving down the tree, after
                 checking local keys.
+        parse_lists : bool, optional
+            If True when `search` is "children", check if self or its children
+            contain a list and check the list for ConfDicts and whether they
+            used their keys. This is slow. Note this only parses lists,
+            strictly, not all Sequences.
 
         Returns
         -------
@@ -215,17 +233,33 @@ class ConfigDict(UserDict, object):
             # Recursively check parents keys, if any haven't been used,
             # immediately return False.
             if self.parent is not None:
-                parent_used = self.parent.accessed_all_keys(search=search)
+                parent_used = self.parent.accessed_all_keys(
+                    search=search,
+                    parse_lists=parse_lists,
+                )
                 if parent_used is False:
                     return False
+
         elif search == 'children':
             # Recursively check children keys, if any haven't been used,
             # immediately return False.
             for k, v in self.data.items():
-                # Assuming its faster to ask for forgiveness than to check
-                # with `isinstance()` or `hasattr()q...
+                if parse_lists and isinstance(v, list):
+                    for item in v:
+                        try:
+                            child_used = item.accessed_all_keys(
+                                search=search,
+                                parse_lists=parse_lists,
+                            )
+                            if child_used is False:
+                                return False
+                        except AttributeError:
+                            continue
+                    continue
+
                 try:
-                    child_used = v.accessed_all_keys(search=search)
+                    child_used = v.accessed_all_keys(search=search,
+                                                     parse_lists=parse_lists)
                     if child_used is False:
                         return False
                 except AttributeError:

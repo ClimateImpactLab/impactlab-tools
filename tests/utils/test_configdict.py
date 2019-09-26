@@ -8,6 +8,18 @@ def simple_nested_tree():
     return {'a': 1, 'b': {'a': 2}, 'c': 3, 'd-4': 4, 'e_5': 5, 'F': 6}
 
 
+def test_gather_configtree_nested_lists():
+    """Test gather_configtree() "parse_lists" option"""
+    d = {'a': 1, 'c': [2, {'x': 'foo', 'y': {'z': 'bar'}}]}
+    conf = gather_configtree(d, parse_lists=True)
+    assert conf['c'][1]['y']['a'] == conf['a']
+
+    assert conf.accessed_all_keys(search='children', parse_lists=True) is False
+    conf['c'][1]['x']
+    conf['c'][1]['y']['z']
+    assert conf.accessed_all_keys(search='children', parse_lists=True) is True
+
+
 def test_configdict_climbs_tree(simple_nested_tree):
     conf = gather_configtree(simple_nested_tree)
     assert conf['b']['c'] == 3
@@ -103,24 +115,6 @@ def test_configdict_key_access_stack_nested(simple_nested_tree):
     top_keys = list(conf.key_access_stack.keys())
     top_keys.sort()
     assert top_keys == ['b', 'f']
-
-
-def test_configdict_accessed_all_keys_local(simple_nested_tree):
-    root_conf = gather_configtree(simple_nested_tree)
-    child_conf = root_conf['b']
-
-    root_conf['a']
-    root_conf['c']
-    root_conf['d-4']
-    root_conf['e-5']
-
-    assert root_conf.accessed_all_keys(search='local') is False
-
-    root_conf['f']
-
-    assert root_conf.accessed_all_keys(search='local') is True
-
-    assert child_conf.accessed_all_keys(search='local') is False
 
 
 def test_configdict_accessed_all_keys_local(simple_nested_tree):
