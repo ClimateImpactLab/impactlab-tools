@@ -87,9 +87,15 @@ def test_unsorted_weights_index(increasing_array):
         weighted = weighting.weighted_quantile_xr(
             increasing_array, [0.125, 0.5], index, dim=dim)
 
-        manual = increasing_array.isel_points(
-            dim=pd.Index([0.125, 0.5], name='quantile'),
-            **{dim: [1, 3]})
+        try:
+            manual = increasing_array.isel_points(
+                dim = pd.Index([0.125, 0.5], name='quantile'),
+                **{dim: [1, 3]})
+        except AttributeError:  # Triggered for xarray >= v0.13
+            manual = increasing_array.isel(
+                **{dim: xr.DataArray([1, 3],
+                                 dims='quantile',
+                                 coords={'quantile': [0.125, 0.5]})}
+            )
 
-        if not (weighted == manual).all():
-            raise ValueError()
+        assert (weighted == manual).all()
