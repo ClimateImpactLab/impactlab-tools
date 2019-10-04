@@ -93,10 +93,9 @@ def test_unsorted_weights_index(increasing_array):
                 **{dim: [1, 3]})
         except AttributeError:  # Triggered for xarray >= v0.13
             manual = increasing_array.isel(
-                dim = xr.DataArray([1, 3],
+                **{dim: xr.DataArray([1, 3],
                                  dims='quantile',
-                                 coords={'quantile': [0.125, 0.5]})
+                                 coords={'quantile': [0.125, 0.5]})}
             )
 
-        if not (weighted == manual).all():
-            raise ValueError()
+        assert (weighted == manual).all()
