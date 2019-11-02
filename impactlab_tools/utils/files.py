@@ -9,6 +9,7 @@ import os
 import yaml
 
 
+SERVER_SHELLVAR = 'IMPACTLAB_SERVER'  # Shell variable name pointing to server.yml
 default_server_config_path = "../server.yml"
 server_config = None
 
@@ -18,12 +19,15 @@ server_config = None
 def sharedpath(subpath):
     """Return a subpath of the configured shareddir."""
     if server_config is None:
-        msg = "Cannot find configuration file at {}".format(
-            default_server_config_path)
 
-        assert os.path.exists(default_server_config_path), msg
+        default_path = os.environ.get(SERVER_SHELLVAR)
+        if default_path is None:
+            default_path = str(default_server_config_path)
 
-        use_config(get_file_config(default_server_config_path))
+        msg = "Cannot find configuration file at {}".format(default_path)
+        assert os.path.exists(default_path), msg
+
+        use_config(get_file_config(default_path))
 
     return os.path.join(server_config['shareddir'], subpath)
 

@@ -8,6 +8,8 @@ v0.4.0
 
  - add new :py:class:`impactlab_tools.utils.configdict.ConfigDict` class and convenience function :py:func:`impactlab_tools.utils.configdict.gather_configtree` (:issue:`434`)
 
+ - :py:func:`impactlab_tools.utils.files.sharedpath` can now get path to "server.yml" from ``IMPACTLAB_SERVER`` shell variable (:issue:`456`).
+
  - fix bug causing assets to be missing from installed package (:issue:`187`)
 
  - resolve warning message from upstream ``pyyaml`` deprecation (:issue:`447`)
