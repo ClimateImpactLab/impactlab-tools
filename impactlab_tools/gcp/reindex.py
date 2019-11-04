@@ -1,10 +1,11 @@
 
 from __future__ import absolute_import
 
-import xarray as xr
+import os
+
 import numpy as np
 import toolz
-import os
+import xarray as xr
 
 import impactlab_tools.assets
 
@@ -174,10 +175,12 @@ def hierid_to_shapenum(data, dim='hierid', new_dim='SHAPENUM', inplace=False):
         raise IndexError(
             'Not all values in "{}" found in "hierid"'.format(dim))
 
-    res.coords[dim] = (
-        mapping
-        .sel(hierid=res.coords[dim].astype(unicode))
-        .SHAPENUM.values)
+    # Insert SHAPENUM values where "dim" values match with mapping['hierid'].
+    # Needed rewrite because `where()` and prev. approach did not work in
+    # xarray v0.14.0.
+    res.coords[dim] = mapping.isel(
+        hierid=mapping['hierid'].isin(res[dim].astype(unicode))
+    )['SHAPENUM'].values
 
     res = res.rename({dim: new_dim})
     return res
