@@ -12,6 +12,8 @@ v0.4.0
 
  - resolve warning message from upstream ``pyyaml`` deprecation (:issue:`447`)
 
+ - work around bug from :py:func:`impactlab_tools.gcp.reindex.hierid_to_shapenum` throwing ``KeyError`` when using ``xarray`` v0.14.0 (:issue:`455`)
+
  - minor fixes to documentation
 
 v0.3.1 (March 19, 2018)
