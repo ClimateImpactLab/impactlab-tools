@@ -22,11 +22,12 @@ def test_sharedpath(use_shellvar, expectedval, tmpdir, monkeypatch):
     # Monkeypatch tmpdir and files default server path for test to avoid
     # messing with local user dir.
     if use_shellvar:
-        # Read from shell variable
+        # Read from shell variable, this is the actual path in sharedir,
+        # which is normally in server.yml but now in shell variable.
         p.write('shareddir: shellvar\n')
-        monkeypatch.setenv(str(ufiles.SERVER_SHELLVAR), str(p))
+        monkeypatch.setenv(str(ufiles.SHAREDDIR_SHELLVAR), 'shellvar')
     else:
-        # Normal behavior
+        # Legacy behavior
         p.write('shareddir: moduledefault\n')
         monkeypatch.setattr(ufiles, 'default_server_config_path', str(p))
 

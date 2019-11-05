@@ -9,7 +9,7 @@ import os
 import yaml
 
 
-SERVER_SHELLVAR = 'IMPACTLAB_SERVER'  # Shell variable name pointing to server.yml
+SHAREDDIR_SHELLVAR = 'IMPERICS_SHAREDDIR'  # Shell variable name pointing to server.yml
 default_server_config_path = "../server.yml"
 server_config = None
 
@@ -18,18 +18,22 @@ server_config = None
 
 def sharedpath(subpath):
     """Return a subpath of the configured shareddir."""
+    shareddir_key = "shareddir"
     if server_config is None:
 
-        default_path = os.environ.get(SERVER_SHELLVAR)
+        default_path = os.environ.get(SHAREDDIR_SHELLVAR)
         if default_path is None:
+            # No shell (environment) variable set. Old behavior
             default_path = str(default_server_config_path)
+            msg = "Cannot find configuration file at {}".format(default_path)
+            assert os.path.exists(default_path), msg
+            server_config_dict = get_file_config(default_path)
+        else:
+            server_config_dict = {shareddir_key: str(default_path)}
 
-        msg = "Cannot find configuration file at {}".format(default_path)
-        assert os.path.exists(default_path), msg
+        use_config(server_config_dict)
 
-        use_config(get_file_config(default_path))
-
-    return os.path.join(server_config['shareddir'], subpath)
+    return os.path.join(server_config[shareddir_key], subpath)
 
 
 def configpath(path):
