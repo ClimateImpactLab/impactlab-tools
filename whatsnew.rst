@@ -8,7 +8,7 @@ v0.4.0
 
  - add new :py:class:`impactlab_tools.utils.configdict.ConfigDict` class and convenience function :py:func:`impactlab_tools.utils.configdict.gather_configtree` (:issue:`434`)
 
- - :py:func:`impactlab_tools.utils.files.sharedpath` can now get path to "server.yml" from ``IMPACTLAB_SERVER`` shell variable (:issue:`456`).
+ - :py:func:`impactlab_tools.utils.files.sharedpath` can now pull the path to "shareddir" path from the ``IMPERICS_SHAREDDIR`` shell variable (:issue:`456`). Previously, this was the only entry in "../server.yml", which is still a valid way of specifying "shareddir".
 
  - fix bug causing assets to be missing from installed package (:issue:`187`)
 
