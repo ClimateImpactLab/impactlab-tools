@@ -17,7 +17,19 @@ server_config = None
 # Path-handling functions
 
 def sharedpath(subpath):
-    """Return a subpath of the configured shareddir."""
+    """Return a subpath of the configured shareddir
+
+    ``shareddir`` is path to the root directory containing the support/data
+    files needed to run impact projections. ``shareddir`` is found first by
+    looking for the ``IMPERICS_SHAREDDIR`` shell/environment variable. If
+    this is not defined, it looks for a "shareddir" entry in a "../server.yml"
+    file.
+
+    Parameters
+    ----------
+    subpath : str
+        Subdirectory path joined onto ``shareddir``.
+    """
     shareddir_key = "shareddir"
     if server_config is None:
 
