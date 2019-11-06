@@ -9,6 +9,7 @@ import os
 import yaml
 
 
+SHAREDDIR_SHELLVAR = "IMPERICS_SHAREDDIR"
 default_server_config_path = "../server.yml"
 server_config = None
 
@@ -16,16 +17,36 @@ server_config = None
 # Path-handling functions
 
 def sharedpath(subpath):
-    """Return a subpath of the configured shareddir."""
+    """Return a subpath of the configured shareddir
+
+    ``shareddir`` is path to the root directory containing the support/data
+    files needed to run impact projections. ``shareddir`` is found first by
+    looking for the ``IMPERICS_SHAREDDIR`` shell/environment variable. If
+    this is not defined, it looks for a "shareddir" entry in a "../server.yml"
+    file.
+
+    Parameters
+    ----------
+    subpath : str
+        Subdirectory path joined onto ``shareddir``.
+    """
+    shareddir_key = "shareddir"
     if server_config is None:
-        msg = "Cannot find configuration file at {}".format(
-            default_server_config_path)
 
-        assert os.path.exists(default_server_config_path), msg
+        default_path = os.environ.get(SHAREDDIR_SHELLVAR)
+        if default_path is None:
+            # No shell (environment) variable set. Old behavior.
+            default_path = str(default_server_config_path)
+            msg = "Cannot find configuration file at {}".format(default_path)
+            assert os.path.exists(default_path), msg
+            server_config_dict = get_file_config(default_path)
+        else:
+            # Use shell (environment) variable to get "shareddir".
+            server_config_dict = {shareddir_key: str(default_path)}
 
-        use_config(get_file_config(default_server_config_path))
+        use_config(server_config_dict)
 
-    return os.path.join(server_config['shareddir'], subpath)
+    return os.path.join(server_config[shareddir_key], subpath)
 
 
 def configpath(path):
