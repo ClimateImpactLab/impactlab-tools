@@ -38,6 +38,7 @@ install:
       python -m pip install -r requirements.txt;
       python -m pip install -r requirements_test.txt;
       conda install twine;
+      python setup.py bdist_wheel sdist;  # Build for twine to check.
     else
       python -m pip install tox-travis;
     fi
@@ -46,6 +47,7 @@ script:
   - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
       source activate impactlab_tools;
       python -m pytest && sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html;
+      twine check dist/*;  # Test built package wheel.
     else
       tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypy\(py\)\?\([0-9\.\-]\+\)\?/pypy/');
     fi
