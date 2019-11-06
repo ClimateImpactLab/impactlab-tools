@@ -42,7 +42,6 @@ install:
     fi
 
 script:
-  - export PATH=/home/travis/miniconda2/bin:$PATH
   - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
       source activate impactlab_tools;
       python -m pytest && sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html;
