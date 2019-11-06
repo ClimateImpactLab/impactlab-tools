@@ -47,7 +47,6 @@ script:
   - if [[ "$IMPACTLAB_TOOLS_TEST_ENV" == "conda" ]]; then
       source activate impactlab_tools;
       python -m pytest && sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html;
-      twine check dist/*;  # Test built package wheel.
     else
       tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d . | sed -e 's/pypy\(py\)\?\([0-9\.\-]\+\)\?/pypy/');
     fi
