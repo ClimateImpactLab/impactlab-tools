@@ -33,7 +33,6 @@ install:
       conda update -q conda;
       conda info -a;
       conda create -q -n impactlab_tools python=$TRAVIS_PYTHON_VERSION;
-      conda install twine;  # To check built python wheel for deployment.
       source activate impactlab_tools;
       conda install --yes --file requirements_conda.txt;
       python -m pip install -r requirements.txt;
