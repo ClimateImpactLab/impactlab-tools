@@ -3,8 +3,8 @@ What's New
 
 These are new features and improvements of note in each release.
 
-v0.4.0
-------
+v0.4.0 (November 14, 2019)
+--------------------------
 
  - add new :py:class:`impactlab_tools.utils.configdict.ConfigDict` class and convenience function :py:func:`impactlab_tools.utils.configdict.gather_configtree` (:issue:`434`)
 
