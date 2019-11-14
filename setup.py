@@ -42,6 +42,7 @@ setup(
     description="Python tools for Climate Impact Lab developers",
     long_description=readme,
     author="Climate Impact Lab",
+    author_email="mdelgado@rhg.com",
     url='https://pypi.python.org/pypi',
     packages=find_packages(
         exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
