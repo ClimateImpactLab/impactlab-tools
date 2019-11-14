@@ -5,6 +5,5 @@ pandas
 scipy
 bottleneck
 geopandas
-gdal
 dask
 matplotlib
