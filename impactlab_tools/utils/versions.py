@@ -120,5 +120,5 @@ def check_version(input_list, check_git=False):
     return rtDict
 
 if __name__ == '__main__':
-    print(check_version(['self', 'impact-calculations', 'metacsv', 'impactlab-tools', 'scipy', 'open-estimate']))
+    print(check_version(['self', 'impact-calculations', 'metacsv', 'impactlab-tools', 'scipy', 'open-estimate', 'numpy']))
     

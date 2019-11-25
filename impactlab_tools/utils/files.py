@@ -54,6 +54,9 @@ def configpath(path):
     will be left alone; otherwise, it is assumed to be a subpath of the
     configured `shareddir`."""
 
+    if path[:2] == './':
+        return path[2:]
+    
     if path[0] == '/':
         return path
 
