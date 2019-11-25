@@ -11,8 +11,9 @@ import yaml
 
 SHAREDDIR_SHELLVAR = "IMPERICS_SHAREDDIR"
 default_server_config_path = "../server.yml"
-server_config = None
+shareddir_key = "shareddir"
 
+server_config = None # filled in upon first call to sharedpath
 
 # Path-handling functions
 
@@ -30,7 +31,6 @@ def sharedpath(subpath):
     subpath : str
         Subdirectory path joined onto ``shareddir``.
     """
-    shareddir_key = "shareddir"
     if server_config is None:
 
         default_path = os.environ.get(SHAREDDIR_SHELLVAR)
