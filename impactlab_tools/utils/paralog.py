@@ -135,6 +135,10 @@ class StatusManager(object):
             to be appended to `self.logpath` to create an extra log file 
         msg: str
             to be written to the extra log file 
+
+        Returns 
+        --------
+        str : the extra log file path. 
         '''
 
         filepath = self.logpath[:-4] + suffix + '.log'
@@ -142,6 +146,7 @@ class StatusManager(object):
         with open(filepath, 'a') as f:
             f.write(msg)
 
+        return filepath 
 
     @staticmethod
     def globalstatus_filepath(dirpath):

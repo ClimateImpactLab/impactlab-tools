@@ -46,7 +46,9 @@ def test_extra_log():
     '''
 
     statman0 = paralog.StatusManager(jobname='test', jobtitle='Testing process', logdir='testing-paralog', timeout=60*60)
-    statman0.extra_log(suffix='-extra', msg='msg in first extra log')
+    extrapath = statman0.extra_log(suffix='-extra', msg='msg in first extra log')
+    assert extrapath=="testing-paralog/test-0-extra.log"
+
     statman1 = paralog.StatusManager(jobname='test', jobtitle='Testing process', logdir='testing-paralog', timeout=60*60)
     statman1.extra_log(suffix='-extra', msg='msg in second extra log')
 
