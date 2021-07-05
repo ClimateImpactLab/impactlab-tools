@@ -138,7 +138,7 @@ class StatusManager(object):
         '''
 
         filepath = self.logpath[:-4] + suffix + '.log'
-        assert os.path.exists(filepath)
+        
         with open(filepath, 'a') as f:
             f.write(msg)
 
