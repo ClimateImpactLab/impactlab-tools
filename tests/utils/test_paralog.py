@@ -40,9 +40,13 @@ def test_claiming():
 
 def test_extra_log():
 
-    ''' split tests by input :
+    ''' 
+    split tests by input :
     - two different instances of Status Manager with different job names and different suffizes => two different files 
     - successive loggings => appends to file 
+    
+    This test creates files that have to be deleted for the test to run sucessfully again. The test deletes these files at the 
+    end, but if it fails before, the user should manually delete these files after fixing the test. 
     '''
 
     statman0 = paralog.StatusManager(jobname='test', jobtitle='Testing process', logdir='testing-paralog', timeout=60*60)
