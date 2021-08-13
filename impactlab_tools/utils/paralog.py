@@ -124,7 +124,7 @@ class StatusManager(object):
 
         return False
 
-    def extra_log(self, suffix='', msg):
+    def extra_log(self, msg, suffix=''):
 
         ''' writes some extra information on the job to an extra log file identified by self.logpath + a suffix. 
         
