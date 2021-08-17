@@ -15,6 +15,8 @@ shareddir_key = "shareddir"
 
 server_config = None # filled in upon first call to sharedpath
 
+shared_record = None #"/home/jrising/research/gcp/xrweather/energy-files.txt"
+
 # Path-handling functions
 
 def sharedpath(subpath):
@@ -31,6 +33,11 @@ def sharedpath(subpath):
     subpath : str
         Subdirectory path joined onto ``shareddir``.
     """
+
+    if shared_record is not None:
+        with open(shared_record, 'a+') as fp:
+            fp.write(subpath + "\n")
+            
     if server_config is None:
 
         default_path = os.environ.get(SHAREDDIR_SHELLVAR)
