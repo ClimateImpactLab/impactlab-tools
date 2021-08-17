@@ -124,29 +124,17 @@ class StatusManager(object):
 
         return False
 
-    def extra_log(self, msg, suffix=''):
-
-        ''' writes some extra information on the job to an extra log file identified by self.logpath + a suffix. 
+    def log_message(self, msg):
+        ''' writes some extra information on the job to the log file. 
         
         Parameters
         ----------
-
-        suffix: str 
-            to be appended to `self.logpath` to create an extra log file 
         msg: str
-            to be written to the extra log file 
-
-        Returns 
-        --------
-        str : the extra log file path. 
+            to be written to the log file
         '''
 
-        filepath = self.logpath[:-4] + suffix + '.log'
-        
-        with open(filepath, 'a') as f:
-            f.write(msg)
-
-        return filepath 
+        assert isinstance(sys.stdout, DoubleLogger)
+        sys.stdout.log_only(msg)
 
     @staticmethod
     def globalstatus_filepath(dirpath):
@@ -183,6 +171,9 @@ class DoubleLogger(object):
         self.terminal.write(message)
         self.log.write(message)
 
+    def log_only(self, message):
+        self.log.write(message + "\n")
+        
     def close(self):
         self.log.close()
 
