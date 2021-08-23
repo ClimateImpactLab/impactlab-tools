@@ -124,6 +124,18 @@ class StatusManager(object):
 
         return False
 
+    def log_message(self, msg):
+        ''' writes some extra information on the job to the log file. 
+        
+        Parameters
+        ----------
+        msg: str
+            to be written to the log file
+        '''
+
+        assert isinstance(sys.stdout, DoubleLogger)
+        sys.stdout.log_only(msg)
+
     @staticmethod
     def globalstatus_filepath(dirpath):
         """The path to the global status for the directory."""
@@ -159,6 +171,9 @@ class DoubleLogger(object):
         self.terminal.write(message)
         self.log.write(message)
 
+    def log_only(self, message):
+        self.log.write(message + "\n")
+        
     def close(self):
         self.log.close()
 
