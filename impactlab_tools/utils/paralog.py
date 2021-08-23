@@ -69,8 +69,12 @@ class StatusManager(object):
 
     def __del__(self):
         """Usually not used; allow std output to go back to its previous stream."""
-        sys.stdout.close()
-        sys.stdout = self.sys_stdout
+        
+        if sys is not None:
+            sys.stdout.close()
+            sys.stdout = self.sys_stdout
+        else:
+            pass 
 
     def claim(self, dirpath):
         """Claim a directory."""
