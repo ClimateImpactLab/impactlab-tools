@@ -70,11 +70,10 @@ class StatusManager(object):
     def __del__(self):
         """Usually not used; allow std output to go back to its previous stream."""
         
-        if sys is not None:
+        if sys is not None and isinstance(sys.stdout, DoubleLogger):
             sys.stdout.close()
             sys.stdout = self.sys_stdout
-        else:
-            pass 
+
 
     def claim(self, dirpath):
         """Claim a directory."""
