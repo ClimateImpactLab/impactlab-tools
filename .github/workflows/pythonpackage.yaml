@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  codequality:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,7 +21,29 @@ jobs:
     defaults:
       run:
         shell: bash
-
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+          cache-dependency-path: 'requirements_dev.txt'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements_dev.txt
+      - name: Format check with flake8
+        run: |
+          flake8
+        
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.x"]
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -36,9 +58,6 @@ jobs:
       - name: Install package
         run: |
           pip install . --no-deps
-      - name: Format check with flake8
-        run: |
-          flake8
       - name: Test with pytest
         run: |
           pytest -v --cov impactlab_tools --cov-report term-missing --cov-report xml
