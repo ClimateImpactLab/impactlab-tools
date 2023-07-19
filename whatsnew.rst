@@ -10,6 +10,8 @@ Unreleased
 
  - Update package dependencies. Require previously unlisted dependencies: ``geopandas``, ``matplotlib``, ``netCDF4``, ``numpy``, ``pandas``, ``scipy``, ``xarray``.
 
+ - Fix error from bad coordinate assignment in ``impactlab_tools.gcp.reindex.hierid_to_shapenum()``.
+
  - Remove dependence on ``toolz`` package.
 
  - Replace ``flake8`` with ``ruff`` for code quality checks.

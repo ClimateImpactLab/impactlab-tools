@@ -164,7 +164,7 @@ def hierid_to_shapenum(data, dim='hierid', new_dim='SHAPENUM', inplace=False):
 
     '''
     mapping = _get_impactregion_mapping()
-    mapping.hierid.values = mapping.hierid.values.astype(unicode)
+    mapping["hierid"] = mapping["hierid"].astype(unicode)
 
     if inplace:
         res = data
