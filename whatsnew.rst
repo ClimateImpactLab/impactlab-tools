@@ -8,9 +8,11 @@ Unreleased
 
  - Drop Python 2 support.
 
- - Replace ``flake8`` with ``ruff`` for code quality checks.
-
  - Update package dependencies. Require previously unlisted dependencies: ``geopandas``, ``matplotlib``, ``netCDF4``, ``numpy``, ``pandas``, ``scipy``, ``xarray``.
+
+ - Remove dependence on ``toolz`` package.
+
+ - Replace ``flake8`` with ``ruff`` for code quality checks.
 
  - Consolidate requirements files into requirements.txt, purely used for Github Actions CI.
 

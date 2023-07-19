@@ -1,10 +1,10 @@
 import numpy as np
 
+from functools import cache
+
 import matplotlib
 import matplotlib.pyplot as plt
 import geopandas as gpd
-
-import toolz
 
 
 def get_shape_path():
@@ -12,7 +12,7 @@ def get_shape_path():
     return 'assets/hierid_regions'
 
 
-@toolz.memoize
+@cache
 def prep_polygons(
         shapepath=None,
         projection='cyl',

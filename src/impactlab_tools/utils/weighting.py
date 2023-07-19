@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-import toolz
+from functools import cache
 import os
 
 import impactlab_tools.assets
@@ -13,7 +13,7 @@ import impactlab_tools.assets
 
 # file readers for default weights files in assets directory
 
-@toolz.memoize
+@cache
 def _get_weights(project='acp', rcp='rcp85'):
 
     da = (

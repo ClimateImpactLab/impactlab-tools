@@ -2,9 +2,9 @@
 from __future__ import absolute_import
 
 import os
+from functools import cache
 
 import numpy as np
-import toolz
 import xarray as xr
 
 import impactlab_tools.assets
@@ -15,7 +15,7 @@ except NameError:
     unicode = str
 
 
-@toolz.memoize
+@cache
 def _get_impactregion_mapping():
     with xr.open_dataset(
             os.path.join(
