@@ -71,3 +71,6 @@ target/
 *.ipynb_checkpoints
 
 .pytest_cache
+
+# Version file created on package builds, installs
+src/impactlab_tools/_version.py
