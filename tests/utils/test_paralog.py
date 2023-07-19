@@ -5,7 +5,6 @@ import shutil
 from impactlab_tools.utils import paralog
 import os, sys
 
-
 def test_claiming():
     statman1 = paralog.StatusManager('test', 'Testing process', 'testing-paralog', 60*60)
     print(statman1.logpath)
