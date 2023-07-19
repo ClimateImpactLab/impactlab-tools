@@ -3,6 +3,11 @@ What's New
 
 These are new features and improvements of note in each release.
 
+Unreleased
+----------
+
+ - Remove Travis-CI configurations. Use Github Actions for CI (:issue:`468`)
+
 v0.4.0 (November 14, 2019)
 --------------------------
 
