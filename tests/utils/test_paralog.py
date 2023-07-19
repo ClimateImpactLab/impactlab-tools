@@ -3,8 +3,7 @@ from __future__ import absolute_import
 
 import shutil
 from impactlab_tools.utils import paralog
-import os
-import sys
+import os, sys
 
 
 def test_claiming():
