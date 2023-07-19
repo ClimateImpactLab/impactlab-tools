@@ -1,6 +1,6 @@
 import pytest
 
-from src.impactlab_tools.utils.configdict import ConfigDict, gather_configtree
+from impactlab_tools.utils.configdict import ConfigDict, gather_configtree
 
 
 @pytest.fixture

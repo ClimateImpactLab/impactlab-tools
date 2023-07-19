@@ -12,6 +12,8 @@ try:
 except NameError:
     unicode = str
 
+import impactlab_tools.assets
+
 
 @toolz.memoize
 def _get_impactregion_mapping():

@@ -7,7 +7,7 @@ import xarray as xr
 import numpy as np
 import pandas as pd
 
-from src.impactlab_tools import weighting
+from impactlab_tools import weighting
 
 
 @pytest.yield_fixture

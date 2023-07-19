@@ -5,16 +5,15 @@ import pytest
 
 
 def test_top_level_imports():
-    from src import impactlab_tools
+    import impactlab_tools
 
     if not isinstance(impactlab_tools, type(pytest)):
         raise TypeError
 
 
 def test_acp_imports():
-    from src.impactlab_tools.acp import dist
-    from src.impactlab_tools.acp import aggregate
-    from src.impactlab_tools.utils import weighting
+    from impactlab_tools.acp import dist, aggregate
+    from impactlab_tools.utils import weighting
 
     if not isinstance(dist, type(pytest)):
         raise TypeError

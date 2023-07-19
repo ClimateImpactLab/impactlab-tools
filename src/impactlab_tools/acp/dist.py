@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import numpy as np
 
-from src.impactlab_tools.utils.weighting import weighted_quantile_xr, _get_weights
+from impactlab_tools.utils.weighting import weighted_quantile_xr, _get_weights
 
 
 def acp_quantiles(

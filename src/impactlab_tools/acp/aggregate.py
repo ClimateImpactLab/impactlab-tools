@@ -4,6 +4,8 @@ from __future__ import absolute_import
 import xarray as xr
 import os
 
+import impactlab_tools.assets
+
 
 def population_weighted_mean(
         ds,

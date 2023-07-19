@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 
 import shutil
-from src.impactlab_tools import paralog
+from impactlab_tools import paralog
 import os
 
 
