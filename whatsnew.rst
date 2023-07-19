@@ -8,7 +8,7 @@ Unreleased
 
  - Drop Python 2 support.
 
- - Update package dependencies. Require previously unlisted dependencies: ``geopandas``, ``matplotlib``, ``netCDF4``, ``numpy``, ``pandas``, ``scipy``, ``xarray``.
+ - Update package dependencies. Require previously unlisted dependencies: ``geopandas``, ``matplotlib``, ``numpy``, ``pandas``, ``scipy``, ``xarray``.
 
  - Fix error from bad coordinate assignment in ``impactlab_tools.gcp.reindex.hierid_to_shapenum()``.
 

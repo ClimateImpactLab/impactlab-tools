@@ -20,7 +20,6 @@ classifiers = [
 dependencies = [
     "geopandas",
     "matplotlib",
-    "netCDF4>=1.1",
     "numpy>=1.7",
     "pandas>=0.15",
     "pyyaml",
