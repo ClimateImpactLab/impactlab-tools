@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "impactlab-tools"
+authors = [
+    { name="Climate Impact Lab", email="mdelgado@rhg.com" },
+]
+description = "Python tools for Climate Impact Lab developers"
+readme = "README.rst"
+dynamic = ["version"]
+requires-python = ">=3.7"
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "geopandas",
+    "matplotlib",
+    "netCDF4>=1.1",
+    "numpy>=1.7",
+    "pandas>=0.15",
+    "pyyaml",
+    "scipy",
+    "xarray>=0.8",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ClimateImpactLab/impactlab-tools"
+"Bug Tracker" = "https://github.com/ClimateImpactLab/impactlab-tools/issues"
+
+[project.optional-dependencies]
+test = [
+    "ruff",
+    "pytest>=3.0",
+    "pytest-cov>=2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "src",
+    "tests",
+]
+addopts = "--cov=impactlab_tools --doctest-modules"
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "999"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/impactlab_tools/_version.py"
+
+[tool.ruff]
+exclude = [
+    ".eggs",
+    "docs",
+]
+# E402: module level import not at top of file
+ignore = [
+    "E402",
+]
+select = [
+    # Pyflakes
+    "F",
+    # Pycodestyle
+    "E",
+    "W",
+    # Pyupgrade
+    "UP",
+]

@@ -6,6 +6,16 @@ These are new features and improvements of note in each release.
 Unreleased
 ----------
 
+ - Drop Python 2 support.
+
+ - Replace ``flake8`` with ``ruff`` for code quality checks.
+
+ - Update package dependencies. Require previously unlisted dependencies: ``geopandas``, ``matplotlib``, ``netCDF4``, ``numpy``, ``pandas``, ``scipy``, ``xarray``.
+
+ - Consolidate requirements files into requirements.txt, purely used for Github Actions CI.
+
+ - Update and refactor into ``src/`` layout with ``pyproject.toml``. Radically simplify the 'meta' of building and maintaining the package.
+
  - Drop ``tox``.
 
  - Remove Travis-CI configurations. Use Github Actions for CI (:issue:`468`)

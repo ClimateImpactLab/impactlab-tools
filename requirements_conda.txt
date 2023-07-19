@@ -1,9 +1,0 @@
-numpy
-netcdf4
-xarray
-pandas
-scipy
-bottleneck
-geopandas
-dask
-matplotlib
