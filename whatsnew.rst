@@ -6,6 +6,8 @@ These are new features and improvements of note in each release.
 Unreleased
 ----------
 
+ - Drop Python 2 support.
+
  - Update package dependencies. Require previously unlisted dependencies: ``geopandas``, ``matplotlib``, ``netCDF4``, ``numpy``, ``pandas``, ``scipy``, ``xarray``.
 
  - Consolidate requirements files into requirements.txt, purely used for Github Actions CI.
