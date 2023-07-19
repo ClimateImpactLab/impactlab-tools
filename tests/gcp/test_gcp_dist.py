@@ -1,7 +1,7 @@
 
 from __future__ import absolute_import
 
-import impactlab_tools.gcp.dist
+import src.impactlab_tools.gcp.dist
 import xarray as xr
 import numpy as np
 
@@ -53,12 +53,12 @@ def test_gcp_quantiles_full(rcp85_models):
         dims=['model'],
         coords=[rcp85_models])
 
-    impactlab_tools.gcp.dist.gcp_quantiles(
+    src.impactlab_tools.gcp.dist.gcp_quantiles(
         test_da, rcp='rcp85', dim='model')
 
 
 def test_gcp_quantiles():
-    da = impactlab_tools.gcp.dist.gcp_quantiles(
+    da = src.impactlab_tools.gcp.dist.gcp_quantiles(
         xr.DataArray(
             [1, 1, 1],
             dims=['model'],

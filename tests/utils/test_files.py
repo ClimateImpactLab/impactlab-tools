@@ -6,7 +6,7 @@ except ImportError:
     pass
 import pytest
 from os import path as ospath
-from impactlab_tools.utils import files as ufiles
+from src.impactlab_tools.utils import files as ufiles
 
 
 @pytest.mark.parametrize('use_shellvar,expectedval',

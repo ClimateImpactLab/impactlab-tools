@@ -7,8 +7,6 @@ import numpy as np
 import toolz
 import xarray as xr
 
-import impactlab_tools.assets
-
 try:
     unicode
 except NameError:

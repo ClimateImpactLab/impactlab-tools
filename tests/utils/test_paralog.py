@@ -2,16 +2,17 @@
 from __future__ import absolute_import
 
 import shutil
-from impactlab_tools.utils import paralog
-import os, sys
+from src.impactlab_tools import paralog
+import os
+
 
 def test_claiming():
-    statman1 = paralog.StatusManager('test', 'Testing process', 'testing-paralog', 60*60)
+    statman1 = paralog.StatusManager('test', 'Testing process', 'testing-paralog', 60 * 60)
     print(statman1.logpath)
     if not statman1.claim("testing-paralog"):
         raise IOError("Cannot claim directory!")
 
-    statman2 = paralog.StatusManager('test', 'Testing process', 'testing-paralog', 60*60)
+    statman2 = paralog.StatusManager('test', 'Testing process', 'testing-paralog', 60 * 60)
     print(statman2.logpath)
     if statman2.claim("testing-paralog"):
         raise IOError("Accidentally claimed directory!")
@@ -47,7 +48,7 @@ def test_log_message():
     end, but if it fails before, the user should manually delete these files after fixing the test. 
     '''
 
-    statman = paralog.StatusManager(jobname='test', jobtitle='Testing process', logdir='testing-paralog', timeout=60*60)
+    statman = paralog.StatusManager(jobname='test', jobtitle='Testing process', logdir='testing-paralog', timeout=60 * 60)
     print("Printed message")
     statman.log_message(msg='Log-only message')
     assert statman.logpath=="testing-paralog/test-0.log"

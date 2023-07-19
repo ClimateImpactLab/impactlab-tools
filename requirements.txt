@@ -1,1 +1,15 @@
+numpy
+netcdf4
+xarray
+pandas
+scipy
+bottleneck
+geopandas
+dask
+matplotlib
+Sphinx
+sphinx-rtd-theme
+flake8
+pytest
+pytest-cov
 pyyaml

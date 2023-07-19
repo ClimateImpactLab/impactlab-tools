@@ -8,8 +8,6 @@ import xarray as xr
 import toolz
 import os
 
-import impactlab_tools.assets
-
 
 # file readers for default weights files in assets directory
 

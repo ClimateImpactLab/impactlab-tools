@@ -1,6 +1,0 @@
-[run]
-omit = 
-    */site-packages/*
-    */lib_pypy/*
-    */.tox/*
-    docs/_*
