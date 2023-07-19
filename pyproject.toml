@@ -34,7 +34,7 @@ dependencies = [
 
 [project.optional-dependencies]
 test = [
-    "flake8>=2.0",
+    "ruff",
     "pytest>=3.0",
     "pytest-cov>=2.0",
 ]
@@ -52,3 +52,22 @@ fallback-version = "999"
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/impactlab_tools/_version.py"
+
+[tool.ruff]
+exclude = [
+    ".eggs",
+    "docs",
+]
+# E402: module level import not at top of file
+ignore = [
+    "E402",
+]
+select = [
+    # Pyflakes
+    "F",
+    # Pycodestyle
+    "E",
+    "W",
+    # Pyupgrade
+    "UP",
+]

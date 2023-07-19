@@ -34,7 +34,7 @@ jobs:
           pip install -r requirements.txt
       - name: Format check with flake8
         run: |
-          flake8
+          ruff check .
         
   test:
     runs-on: ubuntu-latest

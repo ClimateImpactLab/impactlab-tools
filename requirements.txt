@@ -9,7 +9,7 @@ dask
 matplotlib
 Sphinx
 sphinx-rtd-theme
-flake8
 pytest
 pytest-cov
 pyyaml
+ruff==0.0.278
