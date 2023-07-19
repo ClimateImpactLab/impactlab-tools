@@ -15,7 +15,6 @@ requirements_test = [
     'pip>=8.0',
     'wheel>=0.27',
     'flake8>=2.0',
-    'tox>=2.3.0',
     'coverage>=4.0',
     'pytest>=3.0',
     'pytest_cov>=2.0',
