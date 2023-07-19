@@ -5,6 +5,9 @@ Climate Impact Lab development toolkit
 .. image:: https://img.shields.io/pypi/v/impactlab-tools.svg
         :target: https://pypi.python.org/pypi/impactlab-tools
 
+.. image:: https://github.com/ClimateImpactLab/impactlab-tools/actions/workflows/pythonpackage.yaml/badge.svg
+        :target: https://github.com/ClimateImpactLab/impactlab-tools/actions/workflows/pythonpackage.yaml
+
 .. image:: https://coveralls.io/repos/github/ClimateImpactLab/impactlab-tools/badge.svg?branch=master
         :target: https://coveralls.io/github/ClimateImpactLab/impactlab-tools?branch=master
 
