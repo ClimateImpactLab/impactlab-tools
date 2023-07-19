@@ -4,7 +4,6 @@ netcdf4==1.6.4
 xarray==0.12.1
 pandas==0.25.0
 scipy==1.2.1
-bottleneck==1.2.1
 geopandas==0.5.0
 dask==1.2.2
 matplotlib==2.2.4
