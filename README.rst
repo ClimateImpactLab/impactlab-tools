@@ -8,24 +8,13 @@ Climate Impact Lab development toolkit
 .. image:: https://github.com/ClimateImpactLab/impactlab-tools/actions/workflows/pythonpackage.yaml/badge.svg
         :target: https://github.com/ClimateImpactLab/impactlab-tools/actions/workflows/pythonpackage.yaml
 
-.. image:: https://coveralls.io/repos/github/ClimateImpactLab/impactlab-tools/badge.svg?branch=master
-        :target: https://coveralls.io/github/ClimateImpactLab/impactlab-tools?branch=master
+.. image:: https://codecov.io/gh/ClimateImpactLab/impactlab-tools/branch/master/graph/badge.svg?token=DUDCDOPYYC
+        :target: https://codecov.io/gh/ClimateImpactLab/impactlab-tools
 
 .. image:: https://www.readthedocs.io/projects/impactlab-tools/badge/?version=latest
         :target: https://impactlab-tools.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/shield.svg
-     :target: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/
-     :alt: Updates
-
-.. image:: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/python-3-shield.svg
-     :target: https://pyup.io/repos/github/ClimateImpactLab/impactlab-tools/
-     :alt: Python 3
-
-.. image:: https://api.codacy.com/project/badge/Grade/2d53428d5e5e41ecbc673208b2b0692c
-   :alt: Codacy Badge
-   :target: https://www.codacy.com/app/delgadom/impactlab-tools?utm_source=github.com&utm_medium=referral&utm_content=ClimateImpactLab/impactlab-tools&utm_campaign=badger
 
 Python tools for Climate Impact Lab developers
 
