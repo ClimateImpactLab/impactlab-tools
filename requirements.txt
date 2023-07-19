@@ -1,6 +1,6 @@
 # This is only used by Github and Github Actions.
 numpy==1.16.6
-netcdf4==1.5.2
+netcdf4==1.6.4
 xarray==0.12.1
 pandas==0.25.0
 scipy==1.2.1
