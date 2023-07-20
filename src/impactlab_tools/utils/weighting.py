@@ -1,5 +1,4 @@
 
-from __future__ import absolute_import
 
 import numpy as np
 import pandas as pd
@@ -20,7 +19,7 @@ def _get_weights(project='acp', rcp='rcp85'):
         pd.read_csv(
             os.path.join(
                 os.path.dirname(impactlab_tools.assets.__file__),
-                'weights_{}.csv'.format(project)),
+                f'weights_{project}.csv'),
             index_col=[0, 1])['weight']
         .xs(rcp, level='rcp')
         .to_xarray())

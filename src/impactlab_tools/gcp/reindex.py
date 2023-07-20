@@ -1,5 +1,4 @@
 
-from __future__ import absolute_import
 
 import os
 from functools import cache
@@ -91,7 +90,7 @@ def shapenum_to_hierid(data, dim='SHAPENUM', new_dim='hierid', inplace=False):
 
     if not np.in1d(res.coords[dim].values, mapping.SHAPENUM.values).all():
         raise IndexError(
-            'Not all values in "{}" found in SHAPENUM'.format(dim))
+            f'Not all values in "{dim}" found in SHAPENUM')
 
     res.coords[dim] = (
         mapping
@@ -173,7 +172,7 @@ def hierid_to_shapenum(data, dim='hierid', new_dim='SHAPENUM', inplace=False):
 
     if not np.in1d(res.coords[dim].values, mapping.hierid.values).all():
         raise IndexError(
-            'Not all values in "{}" found in "hierid"'.format(dim))
+            f'Not all values in "{dim}" found in "hierid"')
 
     # Insert SHAPENUM values where "dim" values match with mapping['hierid'].
     # Needed rewrite because `where()` and prev. approach did not work in

@@ -27,27 +27,40 @@ Usage:
    to the cross-job status file.
 """
 
-import sys, os, itertools, time, signal
+import sys
+import os
+import itertools
+import time
+import signal
 
-class StatusManager(object):
+class StatusManager:
     def __init__(self, jobname, jobtitle, logdir, timeout, exclusive_jobnames=None):
         """
-        Create a log file to capture all output, and set up to claim directories.
+        Create a log file to capture all output, and set up to claim
+        directories.
 
         Args:
-            jobname: A short name for the job, used in the claim filename (e.g., aggregate)
-            jobtitle: A short descriptive title for the job (e.g., "generate.aggregate configs/mortality-montecarlo.yml")
+            jobname: A short name for the job, used in the claim filename
+                (e.g., aggregate)
+            jobtitle: A short descriptive title for the job (e.g.,
+                "generate.aggregate configs/mortality-montecarlo.yml")
             logdir: The directory for log files.
-            timeout: Seconds after which a job has started on a directory that we assume it has crashed and allow the directory to be re-claimed.
-            exclusive_jobnames: Other job names which cannot be running in the same directory.  Note that `timeout` should be at least as long as the timeouts associated with these.
+            timeout: Seconds after which a job has started on a directory
+                that we assume it has crashed and allow the directory to be
+                re-claimed.
+            exclusive_jobnames: Other job names which cannot be running in
+                the same directory.  Note that `timeout` should be at
+                least as long as the timeouts associated with these.
         """
 
         self.jobname = jobname
         self.jobtitle = jobtitle
         self.timeout = timeout
-        self.exclusive_jobnames = exclusive_jobnames if exclusive_jobnames is not None else []
+        self.exclusive_jobnames = []
+        if exclusive_jobnames is not None:
+            self.exclusive_jobnames = exclusive_jobnames
 
-        # Decide on the name of the log file
+            # Decide on the name of the log file
         if not os.path.exists(logdir):
             os.makedirs(logdir)
         for ii in itertools.count():
@@ -59,17 +72,25 @@ class StatusManager(object):
         try:
             # Record this process in the master log
             with open(os.path.join(logdir, "master.log"), 'a') as fp:
-                fp.write("%s %s: %d %s\n" % (time.asctime(), self.jobtitle, os.getpid(), self.logpath))
-        except:
+                fp.write(
+                    "%s %s: %d %s\n" % (
+                        time.asctime(),
+                        self.jobtitle,
+                        os.getpid(),
+                        self.logpath
+                    )
+                )
+        except Exception:
+            print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
             print("Warning: Could not append to master log.")
-            
+
         # Grab all std out
         self.sys_stdout = sys.stdout
         sys.stdout = DoubleLogger(self.logpath)
 
     def __del__(self):
         """Usually not used; allow std output to go back to its previous stream."""
-        
+
         if sys is not None and isinstance(sys.stdout, DoubleLogger):
             sys.stdout.close()
             sys.stdout = self.sys_stdout
@@ -86,7 +107,8 @@ class StatusManager(object):
         try:
             with open(status_path, 'w') as fp:
                 fp.write("%d %s: %s\n" % (os.getpid(), self.jobtitle, self.logpath))
-        except:
+        except Exception:
+            print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
             return False # Writing error: cannot calim directory
 
         return True
@@ -97,20 +119,23 @@ class StatusManager(object):
         try:
             with open(status_path, 'a') as fp:
                 fp.write(status + '\n')
-        except:
+        except Exception:
+            print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
             print("Warning: Could write status update %s" % status)
 
     def release(self, dirpath, status):
         """Release the claim on this directory."""
         try:
             os.remove(StatusManager.claiming_filepath(dirpath, self.jobname))
-        except:
+        except Exception:
+            print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
             print("Warning: Could not release directory.")
 
         try:
             with open(StatusManager.globalstatus_filepath(dirpath), 'a') as fp:
-                fp.write("%s %s: %s\n" % (time.asctime(), self.jobtitle, status))
-        except:
+                fp.write(f"{time.asctime()} {self.jobtitle}: {status}\n")
+        except Exception:
+            print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
             print("Warning: Could write release status %s" % status)
 
     def is_claimed(self, dirname):
@@ -128,8 +153,8 @@ class StatusManager(object):
         return False
 
     def log_message(self, msg):
-        ''' writes some extra information on the job to the log file. 
-        
+        ''' writes some extra information on the job to the log file.
+
         Parameters
         ----------
         msg: str
@@ -157,14 +182,14 @@ class StatusManager(object):
         if not os.path.exists(filepath):
             return
 
-        with open(filepath, 'r') as fp:
+        with open(filepath) as fp:
             status = fp.read()
             pid = int(status.split()[0])
             os.kill(pid, signal.SIGTERM)
 
         os.remove(filepath)
 
-class DoubleLogger(object):
+class DoubleLogger:
     """From http://stackoverflow.com/questions/14906764/how-to-redirect-stdout-to-both-file-and-console-with-scripting"""
     def __init__(self, logpath):
         self.terminal = sys.stdout
@@ -176,7 +201,7 @@ class DoubleLogger(object):
 
     def log_only(self, message):
         self.log.write(message + "\n")
-        
+
     def close(self):
         self.log.close()
 

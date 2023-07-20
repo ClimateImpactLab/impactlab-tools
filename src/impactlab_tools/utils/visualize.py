@@ -1,8 +1,6 @@
-import numpy as np
 
 from functools import cache
 
-import matplotlib
 import matplotlib.pyplot as plt
 import geopandas as gpd
 

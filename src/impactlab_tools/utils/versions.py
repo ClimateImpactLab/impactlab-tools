@@ -97,7 +97,7 @@ def check_version(input_list, check_git=False):
         version = sp.check_output("git log --format='%H' -n 1", shell=True).rstrip("\n")
         if "\n" not in version:
             git['self'] = version
-            
+
     # Iterate through the input_list and find if the target is in
     # either the modules or the git dictionary, or not at all.
     rtDict = {}
@@ -120,5 +120,17 @@ def check_version(input_list, check_git=False):
     return rtDict
 
 if __name__ == '__main__':
-    print(check_version(['self', 'impact-calculations', 'metacsv', 'impactlab-tools', 'scipy', 'open-estimate', 'numpy']))
-    
+    print(
+        check_version(
+            [
+                'self',
+                'impact-calculations',
+                'metacsv',
+                'impactlab-tools',
+                'scipy',
+                'open-estimate',
+                'numpy',
+            ]
+        )
+    )
+

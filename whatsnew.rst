@@ -14,6 +14,8 @@ Unreleased
 
  - Remove dependence on ``toolz`` package.
 
+ - Quick and dirty code style cleanup.
+
  - Replace ``flake8`` with ``ruff`` for code quality checks.
 
  - Consolidate requirements files into requirements.txt, purely used for Github Actions CI.

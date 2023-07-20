@@ -1,5 +1,4 @@
 
-from __future__ import absolute_import
 
 import pytest
 
@@ -35,7 +34,7 @@ def test_unweighted_median(random_array):
 
     for dim in random_array.dims:
         weighted = weighting.weighted_quantile_xr(
-            random_array, [0.5], np.ones((5)), dim=dim)
+            random_array, [0.5], np.ones(5), dim=dim)
 
         median = random_array.median(dim=dim)
 

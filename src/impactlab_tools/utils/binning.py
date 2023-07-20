@@ -1,5 +1,4 @@
 
-from __future__ import absolute_import
 
 import xarray as xr
 import numpy as np
@@ -134,7 +133,7 @@ def binned_statistic_1d(da, dim, bins=10, statistic='count', value_range=None):
 
     # build index for new array
     bindex = CategoricalIndex(
-        ['({}, {}]'.format(bins[i-1], bins[i]) for i in range(1, len(bins))],
+        [f'({bins[i-1]}, {bins[i]}]' for i in range(1, len(bins))],
         ordered=True)
 
     da = xr.DataArray(

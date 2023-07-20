@@ -37,7 +37,7 @@ def sharedpath(subpath):
         if default_path is None:
             # No shell (environment) variable set. Old behavior.
             default_path = str(default_server_config_path)
-            msg = "Cannot find configuration file at {}".format(default_path)
+            msg = f"Cannot find configuration file at {default_path}"
             assert os.path.exists(default_path), msg
             server_config_dict = get_file_config(default_path)
         else:
@@ -56,7 +56,7 @@ def configpath(path):
 
     if path[:2] == './':
         return path[2:]
-    
+
     if path[0] == '/':
         return path
 
@@ -81,7 +81,7 @@ def use_config(config):
 def get_file_config(filepath):
     """Load a configuration file from a given path."""
 
-    with open(filepath, 'r') as fp:
+    with open(filepath) as fp:
         config = yaml.load(fp, Loader=yaml.FullLoader)
         return config
 
@@ -94,20 +94,22 @@ def get_argv_config(index=1):
     command-line.
     """
 
-    with open(sys.argv[index], 'r') as fp:
+    with open(sys.argv[index]) as fp:
         config = yaml.load(fp, Loader=yaml.FullLoader)
         return config
 
 
 def get_allargv_config():
     """
-    Load a configuration from the command line, merging all arguments into a single configuration dictionary.
+    Load a configuration from the command line, merging all arguments into a
+    single configuration dictionary.
 
     Handles the following kinds of command-line arguments:
     - `*.yml`: a full configuration YaML file, merged into the result dictionary
     - `--config=VALUE`: a full configuration YaML file, as above
     - `--KEY=VALUE`: a single configuration value to be set
-    - anything else: sets an entry in the config file for that anything to have a value of True
+    - anything else: sets an entry in the config file for that anything to
+      have a value of True
 
     Later command-line arguments always overide earlier ones.
     """

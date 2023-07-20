@@ -65,7 +65,7 @@ def gather_configtree(d, parse_lists=False):
     return out
 
 
-class ConfigDict(UserDict, object):
+class ConfigDict(UserDict):
     """Chain-able dictionary to hold projection configurations.
 
     A ConfigDict is a dictionary-like interface to a chainmap/linked list.
@@ -114,7 +114,7 @@ class ConfigDict(UserDict, object):
         dict_keys(['b', 'f', 'e-5'])
     """
     def __init__(self, *args, **kwargs):
-        super(ConfigDict, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.parent = None
 
         for k, v in self.data.items():
@@ -127,7 +127,7 @@ class ConfigDict(UserDict, object):
 
     def __getitem__(self, key):
         key = self._normalize_key(key)
-        out = super(ConfigDict, self).__getitem__(key)
+        out = super().__getitem__(key)
 
         # We don't want to store in key_access_stack if __missing__() was used
         if key in self.data.keys():
@@ -142,7 +142,7 @@ class ConfigDict(UserDict, object):
     def __setitem__(self, key, value):
         # Note we're not changing `value.parents` if `value` is ConfigDict.
         key = self._normalize_key(key)
-        super(ConfigDict, self).__setitem__(key, value)
+        super().__setitem__(key, value)
 
     @staticmethod
     def _normalize_key(key):
@@ -218,7 +218,7 @@ class ConfigDict(UserDict, object):
         search = str(search)
         search_options = ('local', 'parents', 'children')
         if search not in search_options:
-            raise ValueError('`search` must be in {}'.format(search_options))
+            raise ValueError(f'`search` must be in {search_options}')
 
         local_access = set(self.key_access_stack.keys())
         local_keys = set(self.data.keys())

@@ -1,5 +1,4 @@
 
-from __future__ import absolute_import
 
 import numpy as np
 
@@ -46,7 +45,7 @@ def gcp_quantiles(
         dimension along which to retrieve quantiles. The indices of this
         dimension should be valid (case insensitive) GCP climate models.
         Default: `'model'`.
-     
+
      sample_weight : DataArray, optional
         weights to use when producing the weighted quantiles. Required
         if no RCP provided. If not provided, uses the defualt weights

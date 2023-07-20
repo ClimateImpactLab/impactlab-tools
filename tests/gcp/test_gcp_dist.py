@@ -1,5 +1,4 @@
 
-from __future__ import absolute_import
 
 import impactlab_tools.gcp.dist
 import xarray as xr
