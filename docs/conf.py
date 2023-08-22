@@ -65,10 +65,10 @@ extensions = [
 extlinks = {
     'issue': (
         'https://github.com/ClimateImpactLab/impactlab-tools/issues/%s',
-        'GH #'),
+        'GH #%s'),
     'pull': (
         'https://github.com/ClimateImpactLab/impactlab-tools/pull/%s',
-        'PR #')}
+        'PR #%s')}
 
 napoleon_numpy_docstring = True
 

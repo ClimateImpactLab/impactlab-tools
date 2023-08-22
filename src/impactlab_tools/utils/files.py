@@ -105,11 +105,12 @@ def get_allargv_config():
     single configuration dictionary.
 
     Handles the following kinds of command-line arguments:
+
     - `*.yml`: a full configuration YaML file, merged into the result dictionary
     - `--config=VALUE`: a full configuration YaML file, as above
     - `--KEY=VALUE`: a single configuration value to be set
     - anything else: sets an entry in the config file for that anything to
-      have a value of True
+      have a value of True.
 
     Later command-line arguments always overide earlier ones.
     """
