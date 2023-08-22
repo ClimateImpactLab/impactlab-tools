@@ -2,6 +2,9 @@
 '''
 
 
+from impactlab_tools._version import __version__  # noqa: F401
+
+
 __author__ = """Climate Impact Lab"""
 
 _module_imports = (
