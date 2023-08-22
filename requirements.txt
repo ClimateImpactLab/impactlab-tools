@@ -1,12 +1,12 @@
 # This is only used by Github and Github Actions.
-numpy==1.25.1
+numpy==1.25.2
 xarray==2023.7.0
 pandas==2.0.3
 scipy==1.11.1
 h5netcdf==1.2.0
 geopandas==0.13.2
 matplotlib==3.7.2
-Sphinx==7.0.1
+Sphinx==7.1.2
 sphinx-rtd-theme==1.2.2
 pytest==7.4.0
 pytest-cov==4.1.0
