@@ -311,5 +311,5 @@ texinfo_documents = [
 #texinfo_no_detailmenu = False
 
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/2.7', None)
+    'python': ('https://docs.python.org/3', None)
 }
