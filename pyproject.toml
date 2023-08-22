@@ -33,6 +33,10 @@ dependencies = [
 "Bug Tracker" = "https://github.com/ClimateImpactLab/impactlab-tools/issues"
 
 [project.optional-dependencies]
+docs = [
+    "Sphinx",
+    "sphinx-rtd-theme",
+]
 test = [
     "ruff",
     "pytest>=3.0",
