@@ -19,7 +19,7 @@ Climate Impact Lab development toolkit
 Python tools for Climate Impact Lab developers
 
 
-* Documentation: http://impactlab-tools.readthedocs.io/en/latest/.
+* Documentation: http://impactlab-tools.readthedocs.io.
 
 
 Features
@@ -34,7 +34,7 @@ Features
 Usage
 -----
 
-For detailed usage instructions, see the `readthedocs documentation <https://impactlab-tools.readthedocs.io/en/latest/>`_
+For detailed usage instructions, see the `readthedocs documentation <https://impactlab-tools.readthedocs.io>`_
 
 Installation
 ------------
@@ -45,7 +45,7 @@ Installation
 Requirements
 ------------
 
-This package requires python version 2.7 or python 3 (3.4 or higher).
+This package requires Python 3.
 Installing with pip will ensure all dependencies are installed correctly.
 
 
@@ -58,7 +58,7 @@ See `whatsnew <https://github.com/ClimateImpactLab/impactlab-tools/blob/master/w
 Todo
 ----
 
-See `issues <https://bitbucket.org/ClimateImpactLab/impactlab-tools/issues>`_ to see and add to our todos.
+See `issues <https://github.com/ClimateImpactLab/impactlab-tools/issues>`_ to see and add to our todos.
 
 
 Credits
