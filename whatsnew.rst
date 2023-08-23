@@ -3,8 +3,8 @@ What's New
 
 These are new features and improvements of note in each release.
 
-Unreleased
-----------
+v0.5.0 (August 23, 2023)
+------------------------
 
  - Drop Python 2 support. Requires Python >= v3.7.
 
