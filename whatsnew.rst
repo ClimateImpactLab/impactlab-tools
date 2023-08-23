@@ -6,9 +6,9 @@ These are new features and improvements of note in each release.
 Unreleased
 ----------
 
- - General documentation build update. Update to readthedocs v2 configuration.
+ - Drop Python 2 support. Requires Python >= v3.7.
 
- - Drop Python 2 support.
+ - General documentation build update. Update to readthedocs v2 configuration.
 
  - Update package dependencies. Require previously unlisted dependencies: ``h5netcdf``, ``geopandas``, ``matplotlib``, ``numpy``, ``pandas``, ``scipy``, ``xarray``.
 
