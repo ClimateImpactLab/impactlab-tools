@@ -2,7 +2,7 @@
 numpy==1.25.2
 xarray==2023.8.0
 pandas==2.1.0
-scipy==1.11.1
+scipy==1.11.2
 h5netcdf==1.2.0
 geopandas==0.13.2
 matplotlib==3.7.2
