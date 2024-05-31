@@ -6,6 +6,10 @@ These are new features and improvements of note in each release.
 Unreleased
 ----------
 
+ - Minor code cleanup, style update.
+
+ - Update ruff lint section format in pyproject.toml
+
 v0.5.0 (August 23, 2023)
 ------------------------
 
