@@ -6,6 +6,10 @@ These are new features and improvements of note in each release.
 Unreleased
 ----------
 
+ - Drop unused "h5netcdf" dependency. Make "matplotlib", "geopandas" optional dependencies.
+
+ - Add new extras for optional dependencies: ``impactlab-tools[viz]``, ``impactlab-tools[complete]``.
+
  - Minor code cleanup, style update.
 
  - Update ruff lint section format in pyproject.toml
