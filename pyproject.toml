@@ -30,7 +30,7 @@ dependencies = [
 "Bug Tracker" = "https://github.com/ClimateImpactLab/impactlab-tools/issues"
 
 [project.optional-dependencies]
-complete = ["impactlab-tools[vis,docs,test]"]
+complete = ["impactlab-tools[viz,docs,test]"]
 docs = [
     "Sphinx",
     "sphinx-rtd-theme",
