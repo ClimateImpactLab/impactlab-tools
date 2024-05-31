@@ -3,10 +3,10 @@ What's New
 
 These are new features and improvements of note in each release.
 
-Unreleased
-----------
+v0.6.0 (May 31, 2024)
+---------------------
 
- - Drop unused "h5netcdf" dependency. Make "matplotlib", "geopandas" optional dependencies.
+ - Drop unused ``h5netcdf`` dependency. Make ``matplotlib``, ``geopandas`` optional dependencies.
 
  - Add new extras for optional dependencies: ``impactlab-tools[viz]``, ``impactlab-tools[complete]``.
 
