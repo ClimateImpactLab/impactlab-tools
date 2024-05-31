@@ -70,12 +70,12 @@ def shapenum_to_hierid(data, dim='SHAPENUM', new_dim='hierid', inplace=False):
         ...
         >>> reshaped = shapenum_to_hierid(ds)
         >>> reshaped # doctest: +ELLIPSIS
-        <xarray.Dataset>
+        <xarray.Dataset> Size: 4MB
         Dimensions:  (hierid: 24378)
         Coordinates:
-          * hierid   (hierid) ...
+          * hierid   (hierid) <U35 3MB 'CAN.1.2.28' 'CAN.1.17.403' ... 'BWA.4.13'
         Data variables:
-            var1     (hierid) float64 0.417 0.7203 0.0001144 ...
+            var1     (hierid) float64 195kB 0.417 0.7203 0.0001144 ... 0.1359 0.9259
 
         >>> (reshaped.var1.values == ds.var1.values).all()
         True
@@ -151,12 +151,12 @@ def hierid_to_shapenum(data, dim='hierid', new_dim='SHAPENUM', inplace=False):
         ...
         >>> reshaped = hierid_to_shapenum(ds)
         >>> reshaped
-        <xarray.Dataset>
+        <xarray.Dataset> Size: 160B
         Dimensions:   (SHAPENUM: 10)
         Coordinates:
-          * SHAPENUM  (SHAPENUM) float64 1.369e+03 5.747e+03 ...
+          * SHAPENUM  (SHAPENUM) float64 80B 1.369e+03 5.747e+03 ... 5.812e+03 5.832e+03
         Data variables:
-            var2      (SHAPENUM) float64 0.417 0.7203 0.0001144 ...
+            var2      (SHAPENUM) float64 80B 0.417 0.7203 0.0001144 ... 0.3968 0.5388
 
         >>> (reshaped.var2.values == ds.var2.values).all()
         True
