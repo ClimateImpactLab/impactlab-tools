@@ -121,7 +121,7 @@ class StatusManager:
                 fp.write(status + '\n')
         except Exception:
             print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
-            print("Warning: Could write status update %s" % status)
+            print(f"Warning: Could write status update {status}")
 
     def release(self, dirpath, status):
         """Release the claim on this directory."""
@@ -136,7 +136,7 @@ class StatusManager:
                 fp.write(f"{time.asctime()} {self.jobtitle}: {status}\n")
         except Exception:
             print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
-            print("Warning: Could write release status %s" % status)
+            print(f"Warning: Could write release status {status}")
 
     def is_claimed(self, dirname):
         """Check if a directory has claims from any of our jobs."""
@@ -172,7 +172,7 @@ class StatusManager:
     @staticmethod
     def claiming_filepath(dirpath, jobname):
         """Return the path to the status file used for claiming a directory."""
-        return os.path.join(dirpath, "status-%s.txt" % jobname)
+        return os.path.join(dirpath, f"status-{jobname}.txt")
 
     @staticmethod
     def kill_active(dirpath, jobname):
