@@ -10,6 +10,8 @@ Unreleased
 
  - Update ruff lint section format in pyproject.toml
 
+ - Minor update to docstr examples to match xarray > 2023.12.0.
+
 v0.5.0 (August 23, 2023)
 ------------------------
 
