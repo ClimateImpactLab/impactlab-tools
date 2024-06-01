@@ -3,7 +3,7 @@ numpy==1.26.3
 xarray[complete]==2024.5.0
 pandas==2.2.1
 scipy==1.13.0
-geopandas==0.14.3
+geopandas==0.14.4
 matplotlib==3.8.3
 Sphinx==7.3.7
 sphinx-rtd-theme==2.0.0
