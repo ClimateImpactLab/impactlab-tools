@@ -2,7 +2,7 @@
 numpy==1.26.4
 xarray[complete]==2024.6.0
 pandas==2.2.2
-scipy==1.13.0
+scipy==1.14.0
 geopandas==0.14.4
 matplotlib==3.9.0
 Sphinx==7.3.7
