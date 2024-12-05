@@ -7,6 +7,7 @@ Unreleased
 ----------
 
  - Minor code style update.
+ - Update CONTRIBUTING docs to use ``venv`` in the example for creating virtual environments. This tool is bundled with Python by default.
 
 v0.6.0 (May 31, 2024)
 ---------------------

@@ -69,12 +69,14 @@ code.
 Setting up your development environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install your local copy into a virtualenv. Assuming you have virtualenvwrapper
-installed, this is how you set up your fork for local development::
+Install your local copy into a virtual environment. For example, using venv,
+this is how you set up your fork for local development::
 
-    $ mkvirtualenv impactlab-tools
     $ cd impactlab-tools/
-    $ python setup.py develop
+    $ python3 -m venv .venv
+    $ source .venv/bin/activate
+    $ python3 -m pip install -r requirements.txt
+    $ python3 -m pip install -e .
 
 Developing your feature
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -115,13 +117,13 @@ When making any changes to the impactlab-tools codebase, follow the following st
     tests you just wrote. Run tests frequently to make sure you are maintaining
     compatibility with the rest of the package::
 
-        $ python setup.py test
-        $ flake8 impactlab-tools tests docs
+        $ python3 -m pytest
+        $ python3 -m ruff check .
 
     You can run only the tests you wrote using pytest's expression matching
     syntax, e.g.::
 
-        $ pytest -k test_my_new_feature
+        $ python3 -m pytest -k test_my_new_feature
 
 7.  When you are passing all of your tests, run the full test suite.
 
