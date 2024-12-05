@@ -73,7 +73,8 @@ class StatusManager:
             # Record this process in the master log
             with open(os.path.join(logdir, "master.log"), 'a') as fp:
                 fp.write(
-                    f"{time.asctime()} {self.jobtitle}: {os.getpid():d} {self.logpath}\n"
+                    f"{time.asctime()} {self.jobtitle}:"
+                    f"{os.getpid():d} {self.logpath}\n"
                 )
         except Exception:
             print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
