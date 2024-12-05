@@ -101,7 +101,9 @@ class StatusManager:
         status_path = StatusManager.claiming_filepath(dirpath, self.jobname)
         try:
             with open(status_path, 'w') as fp:
-                fp.write(f"{os.getpid():d} {self.jobtitle}: {self.logpath}\n")
+                fp.write(
+                    f"{os.getpid():d} {self.jobtitle}: {self.logpath}\n"
+                )
         except Exception:
             print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
             return False # Writing error: cannot calim directory
