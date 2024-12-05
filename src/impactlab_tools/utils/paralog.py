@@ -64,7 +64,7 @@ class StatusManager:
         if not os.path.exists(logdir):
             os.makedirs(logdir)
         for ii in itertools.count():
-            logpath = os.path.join(logdir, "%s-%d.log" % (jobname, ii))
+            logpath = os.path.join(logdir, f"{jobname}-{ii:d}.log")
             if not os.path.exists(logpath):
                 self.logpath = logpath
                 break
@@ -73,12 +73,8 @@ class StatusManager:
             # Record this process in the master log
             with open(os.path.join(logdir, "master.log"), 'a') as fp:
                 fp.write(
-                    "%s %s: %d %s\n" % (
-                        time.asctime(),
-                        self.jobtitle,
-                        os.getpid(),
-                        self.logpath
-                    )
+                    f"{time.asctime()} {self.jobtitle}:"
+                    f"{os.getpid():d} {self.logpath}\n"
                 )
         except Exception:
             print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
@@ -106,7 +102,9 @@ class StatusManager:
         status_path = StatusManager.claiming_filepath(dirpath, self.jobname)
         try:
             with open(status_path, 'w') as fp:
-                fp.write("%d %s: %s\n" % (os.getpid(), self.jobtitle, self.logpath))
+                fp.write(
+                    f"{os.getpid():d} {self.jobtitle}: {self.logpath}\n"
+                )
         except Exception:
             print("CAUGHT A WILD EXCEPTION BUT IGNORING IT WITHOUT LOGGING IT!")
             return False # Writing error: cannot calim directory
