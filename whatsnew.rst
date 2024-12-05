@@ -6,6 +6,7 @@ These are new features and improvements of note in each release.
 Unreleased
 ----------
 
+ - Minor code style update.
 
 v0.6.0 (May 31, 2024)
 ---------------------
