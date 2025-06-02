@@ -1,5 +1,5 @@
 # This is only used by Github and Github Actions.
-numpy==1.26.4
+numpy==2.0.2
 xarray[complete]==2025.1.2
 pandas==2.2.3
 scipy==1.15.2
